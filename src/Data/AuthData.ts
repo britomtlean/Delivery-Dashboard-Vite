@@ -1,7 +1,9 @@
 import type { LoginType, User } from '../Types/Types';
 
 export class AuthData {
+
     static async login(user: LoginType, url: string): Promise<string> {
+        
         const res = await fetch(url, {
             method: 'POST',
             headers: { 'Content-Type': 'application/json' },

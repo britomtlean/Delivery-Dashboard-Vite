@@ -1,7 +1,8 @@
-import { useState, createContext, useEffect } from 'react';
-import type { PropsWithChildren, SetStateAction } from 'react'; //TIPAGEM PROP
+import { useState, createContext, useEffect, useRef } from 'react';
+import type { PropsWithChildren, RefObject, SetStateAction } from 'react'; //TIPAGEM PROP
 import type { User } from '../Types/Types';
 import { HubConnectionBuilder, type HubConnection } from '@microsoft/signalr';
+import somPedido from '../assets/meme-fail-alert-locran-1-00-01.mp3';
 
 export type ContextType = {
     theme: string;
@@ -22,6 +23,8 @@ export type ContextType = {
     setConnectionStatus: React.Dispatch<SetStateAction<boolean | null>>;
     online: boolean;
     setOnline: React.Dispatch<SetStateAction<boolean>>;
+    ativarSom: () => void;
+    audioRef: RefObject<HTMLAudioElement | null>
 };
 
 
@@ -30,7 +33,6 @@ export const Context: React.Context<ContextType | null> = createContext<ContextT
 /************************************************************************************** */
 
 export const ContextProvider = ({ children }: PropsWithChildren) => {
-
 
 
     const [theme, setTheme] = useState<string>('Default');
@@ -42,6 +44,38 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
     const [connection, setConnection] = useState<HubConnection | null>(null);
     const [connectionStatus, setConnectionStatus] = useState<boolean |null>(null);
     const [online, setOnline] = useState<boolean>(false);
+
+    //******* */
+    const [somAtivado, setSomAtivado] = useState(false);
+    const audioRef = useRef<HTMLAudioElement | null>(null);
+
+    const ativarSom = async () => {
+
+        try {
+            const audio = new Audio(somPedido);
+            audio.volume = 1;
+
+            // força carregamento
+            await audio.load();
+
+            // desbloqueia autoplay
+            await audio.play();
+
+            // pausa imediatamente
+            audio.pause();
+
+            audio.currentTime = 0;
+
+            audioRef.current = audio;
+
+            setSomAtivado(true);
+
+            console.log('✅ Som ativado');
+
+        } catch (err) {
+            console.error('Erro:', err);
+        }
+    };
 
     useEffect(() => {
 
@@ -117,7 +151,9 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
                 connectionStatus,
                 setConnectionStatus,
                 online,
-                setOnline
+                setOnline,
+                ativarSom,
+                audioRef
             }}
         >
             {children}

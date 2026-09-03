@@ -12,25 +12,24 @@ declare global {
 export default function Live() {
 
     //CONTEXT
-    const { notify, setNotify, connection, setConnection, connectionStatus, setConnectionStatus, online, setOnline } = useContext(Context)!;
+    const { notify, setNotify, connection, setConnection, connectionStatus, setConnectionStatus, online, setOnline, ativarSom, audioRef } = useContext(Context)!;
+
+
+    const agora = new Date();
+
+    const hora = Number(
+        new Intl.DateTimeFormat('pt-BR', {
+            timeZone: 'America/Sao_Paulo',
+            hour: 'numeric',
+            hour12: false,
+        }).format(agora)
+    );
 
     /////////////////////// AUDIO \\\\\\\\\\\\\\\\\\\\\\\\\\\
 
-    const [somAtivado, setSomAtivado] = useState(false);
-    const audioRef = useRef<HTMLAudioElement | null>(null);
-
-    //////////////////// FUNCTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\
-
-    const notification = async () => {
-        const permission = await Notification.requestPermission();
-
-        if (permission === 'granted') {
-            console.log('Permissão concedida');
-        }
-    };
-
     const tocarSom = async () => {
         try {
+            
             if (!audioRef.current) return;
 
             audioRef.current.currentTime = 0;
@@ -43,6 +42,16 @@ export default function Live() {
         }
     };
 
+    //////////////////// FUNCTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\
+
+    const notification = async () => {
+        const permission = await Notification.requestPermission();
+
+        if (permission === 'granted') {
+            console.log('Permissão concedida');
+        }
+    };
+
     const entrarNaSala = async () => {
 
         console.log(connection?.state);
@@ -50,7 +59,7 @@ export default function Live() {
         if (!connection) return;
 
         //AJUSTAR
-        if (connection.state === 'Disconnected' || !connectionStatus) {
+        if (connection.state === 'Disconnected') {
             alert('Conexão indisponível');
             return;
         }
@@ -71,26 +80,6 @@ export default function Live() {
         try {
 
             notification();
-
-            const audio = new Audio(somPedido);
-            audio.volume = 1;
-
-            // força carregamento
-            await audio.load();
-
-            // desbloqueia autoplay
-            await audio.play();
-
-            // pausa imediatamente
-            audio.pause();
-
-            audio.currentTime = 0;
-
-            audioRef.current = audio;
-
-            setSomAtivado(true);
-
-            console.log('✅ Som ativado');
 
             await entrarNaSala();
 
@@ -197,6 +186,16 @@ export default function Live() {
                 ?.start()
                 .then(() => {
                     setConnectionStatus(true);
+
+
+                    if (hora >= 8 && hora <24) {
+                        entrarNaSala();
+                        console.log('Horário válido!');
+                    } else {
+                        console.log('Fora do horário permitido.');
+                    }
+
+
                     console.log('Status: Conectado.')
                 })
                 .catch(() => {
@@ -223,7 +222,15 @@ export default function Live() {
 
             console.log('Conectando...');
 
-            await connection?.start().then(() => setConnectionStatus(true));
+            await connection?.start().then(() => {
+                setConnectionStatus(true);
+                    if (hora >= 8 && hora < 23) {
+                        entrarNaSala();
+                        console.log('Horário válido!');
+                    } else {
+                        console.log('Fora do horário permitido.');
+                    }
+            });
         };
 
         //verificarConexao();
@@ -254,7 +261,15 @@ export default function Live() {
                         `}
                         onClick={enable}
                     >
-                        {online ? "Desconectar" : "Conectar"}
+                        {online ? 'Desconectar' : 'Conectar'}
+                    </button>
+
+                    <button
+                        className={`mb-15 rounded-lg bg-blue-500! px-4 py-2 text-base font-bold text-white active:scale-95
+                        `}
+                        onClick={ativarSom}
+                    >
+                        Ativar som
                     </button>
                 </div>
 

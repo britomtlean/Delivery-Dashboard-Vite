@@ -35,7 +35,7 @@ const Home = () => {
 
     }, [login]);
 
-    //NAVEGAÇÃO
+    //********************** ADICIONAR AO CONTEXT *************************/
     const [section, setSection] = useState<string>('live');
 
     const renderComponente = (): JSX.Element => {
@@ -56,6 +56,8 @@ const Home = () => {
                 return <Live />;
         }
     };
+
+    //****************************************************************** */
 
     return (
         <>

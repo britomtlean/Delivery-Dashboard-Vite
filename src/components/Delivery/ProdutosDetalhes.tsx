@@ -108,6 +108,7 @@ const ProdutosDetalhes = () => {
             headers: {
                 Authorization: `Bearer ${JSON.parse(token)}`,
             },
+            //formdata
             body: produto,
         });
 
