@@ -1,6 +1,7 @@
 export type Product = {
     id?: string;
     nome: string;
+    codigoBarra?: string;
     descricao?: string;
     categoria?: string;
     disponibilidade?: boolean;

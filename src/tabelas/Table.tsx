@@ -28,7 +28,11 @@ const Table = () => {
 
     const dadosFiltrados = produtos?.filter((item) => {
         const texto = busca.toLowerCase();
-        return item.nome.toLowerCase().includes(texto) || String(item.valor).includes(texto);
+        return (
+            item.nome.toLowerCase().includes(texto) ||
+            String(item.valor).includes(texto) ||
+            item.codigoBarra?.toLowerCase().includes(texto)
+        );
     });
 
     ////////////////////////////////////////////////////////////////////

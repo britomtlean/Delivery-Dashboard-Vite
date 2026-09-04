@@ -5,12 +5,6 @@ import { HubConnectionBuilder, type HubConnection } from '@microsoft/signalr';
 import somPedido from '../assets/meme-fail-alert-locran-1-00-01.mp3';
 
 export type ContextType = {
-    theme: string;
-    setTheme: React.Dispatch<React.SetStateAction<string>>;
-    status: boolean;
-    setStatus: React.Dispatch<React.SetStateAction<boolean>>;
-    message: string;
-    setMessage: React.Dispatch<React.SetStateAction<string>>;
     login: User | null;
     setLogin: React.Dispatch<React.SetStateAction<User | null>>;
     contato: string;
@@ -34,10 +28,6 @@ export const Context: React.Context<ContextType | null> = createContext<ContextT
 
 export const ContextProvider = ({ children }: PropsWithChildren) => {
 
-
-    const [theme, setTheme] = useState<string>('Default');
-    const [status, setStatus] = useState<boolean>(true);
-    const [message, setMessage] = useState<string>('Hello Context');
     const [contato, setContato] = useState<string>('');
     const [notify, setNotify] = useState<Array<Record<string, any>> | null>(null);
     const [login, setLogin] = useState<User | null>(null);
@@ -134,12 +124,6 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
     return (
         <Context.Provider
             value={{
-                theme,
-                setTheme,
-                status,
-                setStatus,
-                message,
-                setMessage,
                 login,
                 setLogin,
                 contato,

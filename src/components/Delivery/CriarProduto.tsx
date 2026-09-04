@@ -1,7 +1,7 @@
-import { useState, type Dispatch, type SetStateAction } from 'react'
+import { useContext, useState, type Dispatch, type SetStateAction } from 'react'
 import { FaBoxOpen } from 'react-icons/fa6';
-import { useNavigate } from 'react-router-dom';
 import { getToken } from '../../Services/Storage';
+import { Context } from '../../context/ContextProvider';
 
 type Prop = {
     render: Dispatch<SetStateAction<string>>;
@@ -9,7 +9,8 @@ type Prop = {
 
 const CriarProduto = ({render}: Prop) => {
 
-    const navigate = useNavigate();
+
+    const { login } = useContext(Context)!;
 
     const [nome, setNome ] = useState<string>();
     const [valor, setValor] = useState<string>();
@@ -25,6 +26,7 @@ const CriarProduto = ({render}: Prop) => {
         const formData = new FormData();
 
         formData.append('nome', nome!);
+        formData.append('login', login?.user!);
         formData.append('valor', valor!.replace(',', '.'));
         formData.append('estoque', estoque!);
         formData.append('categoria', categoria!);
@@ -46,13 +48,8 @@ const CriarProduto = ({render}: Prop) => {
 
         const data = await res.json();
 
-        if(res.ok)
-        {
-            alert('Produto criado com sucesso!')
-            render("produtos");
-        }
-
         console.log(data)
+        render("produtos");
 
     };
 

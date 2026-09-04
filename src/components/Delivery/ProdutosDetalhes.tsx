@@ -1,7 +1,8 @@
-import { useState, useEffect, useRef } from 'react';
+import { useState, useEffect, useRef, useContext } from 'react';
 import { useParams, useNavigate } from 'react-router-dom';
 import type { Product } from '../../Types/Types';
 import { getToken } from '../../Services/Storage';
+import { Context } from '../../context/ContextProvider';
 
 const ProdutosDetalhes = () => {
 
@@ -9,12 +10,14 @@ const ProdutosDetalhes = () => {
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate();
 
+    const { login } = useContext(Context)!;
+
     // PRODUCTS
     const [produto, setProduto] = useState<Product | null>(null);
 
     //DISPLAY
     const [display, setDisplay] = useState<boolean>(false);
-    const [nome, setNome ] = useState<string>();
+    const [nome, setNome] = useState<string>();
     const [desc, setDesc] = useState<string>();
     const [valor, setValor] = useState<string>();
 
@@ -96,8 +99,9 @@ const ProdutosDetalhes = () => {
         e.preventDefault();
 
         const produto = new FormData();
-        //produto.append('id', id);
+
         produto.append('nome', nome!);
+        produto.append('login', login?.user!);
         produto.append('descricao', desc!);
         produto.append('valor', valor!);
         produto.append('disponibilidade', disponibilidade!);
@@ -192,10 +196,12 @@ const ProdutosDetalhes = () => {
 
                             ${display ? 'flex flex-5 shadow-xl/30 shadow-[0_0_80px_2px_rgba(100,197,223,0.5)] inset-shadow-sm border-3' : 'hidden boder-1'}`}
             >
+
                 <h1 className="font-bold text-black opacity-100 text-5xl!">Edição</h1>
+
                 <form
                     className="h-full flex-2
-              flex flex-col gap-3 justify-start items-center"
+                        flex flex-col gap-3 justify-start items-center"
                     onSubmit={(e) => {
                         update(e, produto?.id!);
                     }}
@@ -213,7 +219,6 @@ const ProdutosDetalhes = () => {
                     />
 
                     <input
-                        disabled
                         type="text"
                         name="descricao"
                         defaultValue={produto?.descricao}
