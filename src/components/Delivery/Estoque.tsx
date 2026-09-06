@@ -98,13 +98,13 @@ const Estoque = () => {
 
     return (
         <div
-            className="w-full h-screen
+            className="w-full h-screen pt-10
             flex flex-col justify-start items-center gap-4"
         >
             <select
                 name=""
                 id=""
-                className="w-1/2 bg-slate-200 p-4 rounded-xl mb-10"
+                className="w-1/2 bg-slate-200 p-4 rounded-xl mb-5"
                 onChange={(e) => {
                     setEstoque(e.target.value);
                 }}
@@ -113,14 +113,14 @@ const Estoque = () => {
                 <option value="saida">Saida</option>
             </select>
 
-            <div className="w-full h-full flex justify-between gap-4 items-start">
+            <div className="w-full h-full flex justify-center gap-4 items-start">
                 <table
-                    className="w-3/4 h-full max-h-[600px] p-5 lg:p-7
+                    className="w-3/5 h-full max-h-[400px] p-5 lg:p-7
                 row-start-1 row-span-4 col-start-4 col-span-4
                 flex flex-col justify-start items-center
                 font-bold text-left
                 bg-radial from-blue-400/20 to-blue-500/20
-                shadow-xl/30 border border-white/0 rounded-3xl
+                shadow-xl/10 border border-white/0 rounded-3xl
                 hover:border-[3px] hover:border-[#64ffdd]"
                 >
                     <input
@@ -132,14 +132,14 @@ const Estoque = () => {
                     />
 
                     <thead className="w-full">
-                        <tr className="w-full grid grid-cols-3 py-2 bg-slate-200 rounded-t-lg px-2 lg:px-8 gap-x-50">
+                        <tr className="w-full text-[1rem] grid grid-cols-3 py-2 bg-slate-200 rounded-t-lg px-2 lg:px-8 gap-x-50">
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Estoque</th>
                         </tr>
                     </thead>
 
-                    <tbody className="w-full overflow-y-scroll rounded-b-lg">
+                    <tbody className="w-full overflow-y-scroll rounded-b-lg text-[1rem]">
                         {dadosFiltrados?.map((item) => (
                             <tr
                                 className="grid grid-rows-2 grid-cols-3 px-2 lg:px-8 gap-x-50
@@ -160,7 +160,7 @@ const Estoque = () => {
                     </tbody>
                 </table>
 
-                <div className="w-1/2 h-full flex flex-col items-center justify-start gap-4 p-20">
+                <div className="w-1/2 h-full flex flex-col items-center justify-start gap-4 p-10 xl:w-[500px]">
                     {estoque == 'entrada' ? (
                         <h1 className="text-4xl! text-black! font-bold!">Entrada</h1>
                     ) : (
@@ -180,18 +180,19 @@ const Estoque = () => {
                             }}
                             className="w-full p-2 bg-gray-200 rounded-xl outline-none!"
                             type="search"
+                            placeholder="Insira o ID do produto"
                             value={produtoSelecionado}
                         />
                         <input
                             onChange={(e) => {
                                 setQuantidadeSelecionada(() => {
-                                    const value = e.target.value.replace(/[^0-9]/g, '')
-                                    return value
-
+                                    const value = e.target.value.replace(/[^0-9]/g, '');
+                                    return value;
                                 });
                             }}
                             className="w-full p-2 bg-gray-200 rounded-xl outline-none!"
                             type="search"
+                            placeholder="Insira a quantidade"
                             value={quantidadeSelecionada}
                         />
                         <button type="submit">Salvar</button>

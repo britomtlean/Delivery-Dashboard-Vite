@@ -12,7 +12,7 @@ declare global {
 export default function Live() {
 
     //CONTEXT
-    const { notify, setNotify, connection, setConnection, connectionStatus, setConnectionStatus, online, setOnline, ativarSom, audioRef } = useContext(Context)!;
+    const { notify, setNotify, connection, connectionStatus, setConnectionStatus, online, setOnline, ativarSom, audioRef } = useContext(Context)!;
 
 
     const agora = new Date();
@@ -29,7 +29,7 @@ export default function Live() {
 
     const tocarSom = async () => {
         try {
-            
+
             if (!audioRef.current) return;
 
             audioRef.current.currentTime = 0;
@@ -41,6 +41,7 @@ export default function Live() {
             console.error('Erro ao tocar:', err);
         }
     };
+
 
     //////////////////// FUNCTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -87,10 +88,6 @@ export default function Live() {
             console.error('Erro:', err);
         }
     };
-
-    ///////////////////////////////////////////////////////////
-
-    /////////////////////////// ACTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     const confirmOrder = async (id: string) => {
         try {
@@ -143,6 +140,7 @@ export default function Live() {
             console.error(err);
         }
     };
+
     ///////////////////////////////////////////////////////////
 
     useEffect(() => {
@@ -223,8 +221,10 @@ export default function Live() {
             console.log('Conectando...');
 
             await connection?.start().then(() => {
+
                 setConnectionStatus(true);
-                    if (hora >= 8 && hora < 23) {
+
+                    if (hora >= 8 && hora < 24) {
                         entrarNaSala();
                         console.log('Horário válido!');
                     } else {
@@ -276,7 +276,7 @@ export default function Live() {
                 <section className="flex w-[90%] flex-col items-center">
                     <h1
                         className="
-                                text-3xl
+                                text-4xl!
                                 font-extrabold!
                                 animate-[led_8s_linear_infinite]
                             "

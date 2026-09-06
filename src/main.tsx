@@ -12,7 +12,7 @@ import { ContextProvider } from './context/ContextProvider';
 //COMPONENTS
 import Login from './components/All/Login.tsx';
 import Home from './components/Delivery/Home.tsx';
-import ProdutosDetalhes from './components/Delivery/ProdutosDetalhes.tsx';
+import EditarProoduto from './components/Delivery/EditarProduto.tsx';
 
 registerSW({
     immediate: true,
@@ -29,7 +29,7 @@ let router = createBrowserRouter([
     },
     {
         path: '/produto/:id',
-        element: <ProdutosDetalhes />,
+        element: <EditarProoduto />,
     },
 ]);
 

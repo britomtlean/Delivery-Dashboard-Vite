@@ -4,7 +4,7 @@ import type { Product } from '../../Types/Types';
 import { getToken } from '../../Services/Storage';
 import { Context } from '../../context/ContextProvider';
 
-const ProdutosDetalhes = () => {
+const EditarProduto = () => {
 
     //ROUTER
     const { id } = useParams<{ id: string }>();
@@ -147,7 +147,6 @@ const ProdutosDetalhes = () => {
         });
     };
 
-        //EFFECT
 
     useEffect(() => {
         getProducts();
@@ -324,4 +323,4 @@ const ProdutosDetalhes = () => {
     );
 };
 
-export default ProdutosDetalhes;
+export default EditarProduto;

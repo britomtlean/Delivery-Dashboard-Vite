@@ -65,7 +65,7 @@ const Login = () => {
 
         const login: LoginType = {
             user: user,
-            password: password,
+            senha: password,
         };
 
         setLoading(true);

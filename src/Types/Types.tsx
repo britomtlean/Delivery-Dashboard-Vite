@@ -13,7 +13,7 @@ export type Product = {
 
 export type LoginType = {
     user: string;
-    password: string;
+    senha: string;
 };
 
 export type User = {
@@ -21,4 +21,11 @@ export type User = {
     nome: string;
     user: string;
     senha: string;
+    descricao?: string;
+    endereco?: string;
+    horario?: string;
+    background?: string;
+    whatsApp?: string;
+    instagram?: string;
+    color?: string;
 };

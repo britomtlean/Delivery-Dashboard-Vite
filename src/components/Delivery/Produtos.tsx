@@ -172,7 +172,7 @@ const Produtos = ({ render }: Prop) => {
             <div className="w-full h-3/5 lg:h-3/4 lg:w-8/9 row-start-1 row-span-3 col-start-1 col-span-3 relative -top-10">
                 <h1
                     className="
-                    text-lg lg:text-4xl!
+                    text-lg lg:text-3xl!
                     text-black!
                     font-black font-sans!
                     mb-4 text-center
@@ -210,17 +210,17 @@ const Produtos = ({ render }: Prop) => {
                         ) : (
                             <>
                                 <img
-                                    className="max-w-[80%] max-h-[50%]
+                                    className="max-w-[800%] max-h-[70%]
                                 object-contain rounded-2xl
                                 transition-transform hover:scale-105"
                                     src={firstProduct.imagem}
                                     alt={firstProduct.nome}
                                 />
 
-                                <h2 className="mt-4 text-black text-xl font-black">{firstProduct.nome}</h2>
+                                <h2 className="mt-4 text-black text-xl! font-black">{firstProduct.nome}</h2>
 
-                                <h2 className="text-gray-800 text-xl font-bold">
-                                    {firstProduct.valor.toLocaleString('pt-BR', {
+                                <h2 className="text-gray-800 text-xl! font-bold">
+                                    {Number(firstProduct.valor).toLocaleString('pt-BR', {
                                         style: 'currency',
                                         currency: 'BRL',
                                     })}
@@ -249,7 +249,7 @@ const Produtos = ({ render }: Prop) => {
                 bg-radial from-blue-400/20 to-blue-500/20 shadow-xl/30 border border-white rounded-3xl
                 hover:border-[3px] hover:border-[#64ffdd]"
             >
-                <h1 className="text-3xl! text-black! font-sans font-medium">Total de vendas:</h1>
+                <h1 className="text-3xl! text-black! font-sans font-light">Total de vendas:</h1>
 
                 <div className="text-1xl bg-white/30 w-full h-full py-8 text-center rounded-3xl flex justify-center items-center">
                     <h2 className="text-red-600 font-extrabold font-sans text-2xl">
@@ -308,7 +308,7 @@ const Produtos = ({ render }: Prop) => {
             </table>
 
             <button
-                className="h-3/4 w-full bg-blue-500! py-4! lg:relative lg:-top-4 hidden lg:block
+                className="h-3/5 w-full bg-blue-500! py-4! lg:relative lg:-top-4 hidden lg:block
                 col-start-4 col-span-4 row-start-5
                 shadow-xl/30 rounded-3xl text-white"
                 onClick={() => render('new')}

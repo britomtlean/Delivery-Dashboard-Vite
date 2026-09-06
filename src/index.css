@@ -1,5 +1,9 @@
 @import 'tailwindcss';
 
+*{
+font-size: 0.9rem;
+}
+
 #root {
     margin: 0;
     display: flex;
@@ -18,7 +22,6 @@
 }
 
 h1 {
-    font-size: 2.5em;
     line-height: 1.1;
     color: white;
 }
