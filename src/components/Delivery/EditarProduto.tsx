@@ -161,7 +161,7 @@ const EditarProduto = () => {
             <div
                 className={`flex justify-start items-center flex-col
                             h-3/4  py-15 mt-2 rounded-lg gap-4 transition-opacity ease-out duration-1000
-                            ${display ? 'flex-3 opacity-40' : 'w-[90%] lg:w-[50%]'}`}
+                            ${display ? 'flex-3 opacity-80' : 'w-[90%] lg:w-[50%]'}`}
             >
                 <img className="flex-5 max-w-4/5 max-h-[280px] rounded-3xl" src={`${produto?.imagem}`} alt="" />
                 <h2 className="font-bold text-2xl">{produto?.nome}</h2>
@@ -190,16 +190,16 @@ const EditarProduto = () => {
             </div>
 
             <div
-                className={`flex justify-start items-center flex-col
-                            lg:h-[80%] flex-1 py-12 mt-8 rounded-lg gap-4 border transition-all ease-out duration-1000 border-cyan-300
+                className={`flex justify-start items-center flex-col bg-slate-800/80
+                            lg:h-[80%] flex-1 py-8 mt-8 rounded-lg gap-4 border transition-all ease-out duration-1000 border-cyan-300
 
                             ${display ? 'flex flex-5 shadow-xl/30 shadow-[0_0_80px_2px_rgba(100,197,223,0.5)] inset-shadow-sm border-3' : 'hidden boder-1'}`}
             >
 
-                <h1 className="font-bold text-black opacity-100 text-5xl!">Edição</h1>
+                <h1 className="font-bold text-black opacity-100 text-3xl!">Edição</h1>
 
                 <form
-                    className="h-full flex-2
+                    className="h-full w-1/2
                         flex flex-col gap-3 justify-start items-center"
                     onSubmit={(e) => {
                         update(e, produto?.id!);
@@ -303,14 +303,14 @@ const EditarProduto = () => {
 
                     <input
                         disabled
-                        className="bg-blue-400 p-4 w-full rounded-lg text-center opacity-50"
+                        className="bg-blue-400 p-3 w-full rounded-lg text-center opacity-50"
                         type="file"
                         accept="image/*"
                     />
 
                     <button
                         disabled
-                        className={`bg-cyan-500! px-4 py-5! w-full rounded-lg text-center
+                        className={`bg-cyan-500! px-4 py-3! w-full rounded-lg text-center
                                     ${display ? 'opacity-100' : 'opacity-50'}`}
                         type="submit"
                         ref={buttonRef}

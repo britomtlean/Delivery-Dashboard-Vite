@@ -67,12 +67,12 @@ const CriarProduto = ({render}: Prop) => {
             flex flex-col justify-start items-center gap-4 p-4"
       >
           <div className="w-full text-center font-black">
-              <h1 className="text-black!">Criar Produto</h1>
+              <h1 className="text-black! text-3xl!">Criar Produto</h1>
           </div>
 
           <div className="w-full h-full flex justify-center pt-4 px-4 gap-10">
               <div className="flex-1">
-                  <FaBoxOpen className="w-full text-9xl text-gray-200" />
+                  <FaBoxOpen className="w-full text-9xl! text-gray-200" />
               </div>
 
               <form

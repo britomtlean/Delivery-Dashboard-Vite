@@ -95,7 +95,7 @@ const Login = () => {
             className="w-full max-w-md p-8 rounded-2xl shadow-lg mt-50
                  bg-white/10 backdrop-blur-md"
         >
-            <h1 className="text-3xl font-bold text-center text-gray-800 mb-8">Login</h1>
+            <h1 className="text-3xl! font-bold text-center text-gray-800 mb-8">Login</h1>
 
             <form
                 onSubmit={(e) => {
