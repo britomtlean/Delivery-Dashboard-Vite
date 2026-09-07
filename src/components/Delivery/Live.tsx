@@ -12,7 +12,7 @@ declare global {
 export default function Live() {
 
     //CONTEXT
-    const { notify, setNotify, connection, connectionStatus, setConnectionStatus, online, setOnline, ativarSom, audioRef } = useContext(Context)!;
+    const { notify, setNotify, connection, connectionStatus, setConnectionStatus, online, setOnline, ativarSom, audioRef, login } = useContext(Context)!;
 
 
     const agora = new Date();
@@ -42,7 +42,6 @@ export default function Live() {
         }
     };
 
-
     //////////////////// FUNCTIONS \\\\\\\\\\\\\\\\\\\\\\\\\\\\
 
     const notification = async () => {
@@ -66,12 +65,12 @@ export default function Live() {
         }
 
         if(online){
-            await connection.invoke('SairSala', 'loja');
+            await connection.invoke('SairSala', login?.user);
             setOnline(false);
             return
         }
 
-        await connection.invoke('EntrarSala', JSON.stringify({ sala: 'loja', chaveAcesso: 'delivery1234' }));
+        await connection.invoke('EntrarSala', JSON.stringify({ sala: login?.user, chaveAcesso: 'delivery1234' }));
 
         //////////////////////////////////////////////
     };
@@ -210,7 +209,7 @@ export default function Live() {
 
     },[connection])
 
-
+    // ****************** ADICIONAR CONNECTIONSTATUS COMO PARAMETRO ****************/
     useEffect(() => {
 
         const verificarConexao = async () => {
