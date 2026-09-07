@@ -12,7 +12,7 @@ declare global {
 export default function Live() {
 
     //CONTEXT
-    const { notify, setNotify, connection, connectionStatus, setConnectionStatus, online, setOnline, ativarSom, audioRef, login } = useContext(Context)!;
+    const { notify, setNotify, connection, setConnectionStatus, online,  ativarSom, audioRef, entrarNaSala } = useContext(Context)!;
 
 
     const agora = new Date();
@@ -50,29 +50,6 @@ export default function Live() {
         if (permission === 'granted') {
             console.log('Permissão concedida');
         }
-    };
-
-    const entrarNaSala = async () => {
-
-        console.log(connection?.state);
-
-        if (!connection) return;
-
-        //AJUSTAR
-        if (connection.state === 'Disconnected') {
-            alert('Conexão indisponível');
-            return;
-        }
-
-        if(online){
-            await connection.invoke('SairSala', login?.user);
-            setOnline(false);
-            return
-        }
-
-        await connection.invoke('EntrarSala', JSON.stringify({ sala: login?.user, chaveAcesso: 'delivery1234' }));
-
-        //////////////////////////////////////////////
     };
 
     const enable = async () => {
@@ -209,7 +186,6 @@ export default function Live() {
 
     },[connection])
 
-    // ****************** ADICIONAR CONNECTIONSTATUS COMO PARAMETRO ****************/
     useEffect(() => {
 
         const verificarConexao = async () => {

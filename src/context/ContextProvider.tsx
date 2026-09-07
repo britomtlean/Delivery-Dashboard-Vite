@@ -19,6 +19,7 @@ export type ContextType = {
     setOnline: React.Dispatch<SetStateAction<boolean>>;
     ativarSom: () => void;
     audioRef: RefObject<HTMLAudioElement | null>
+    entrarNaSala: () => Promise<void>;
 };
 
 
@@ -38,6 +39,28 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
     //******* */
     const [somAtivado, setSomAtivado] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
+
+    const entrarNaSala = async () => {
+        console.log(connection?.state);
+
+        if (!connection) return;
+
+        //AJUSTAR
+        if (connection.state === 'Disconnected') {
+            alert('Conexão indisponível');
+            return;
+        }
+
+        if (online) {
+            await connection.invoke('SairSala', login?.user);
+            setOnline(false);
+            return;
+        }
+
+        await connection.invoke('EntrarSala', JSON.stringify({ sala: login?.user, chaveAcesso: 'delivery1234' }));
+
+        //////////////////////////////////////////////
+    };
 
     const ativarSom = async () => {
 
@@ -105,6 +128,8 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
                 setConnectionStatus((prev: any) => {
                     return true;
                 });
+
+                await entrarNaSala();
             });
 
             newConnection.on('Erro', async (mensagem: string) => {
@@ -137,7 +162,8 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
                 online,
                 setOnline,
                 ativarSom,
-                audioRef
+                audioRef,
+                entrarNaSala
             }}
         >
             {children}
