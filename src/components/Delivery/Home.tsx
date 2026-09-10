@@ -67,8 +67,8 @@ const Home = () => {
             {login ? (
                 <>
                     <header
-                        className="w-full h-[10vh] gap-5 py-4 flex justify-center items-center px-[5%] mb-4 bg-[rgb(48,62,83)]
-                        lg:px-[20%] xl:justify-between "
+                        className="w-full h-[8vh] gap-5 py-4 flex justify-center items-center px-[5%] mb-4 bg-[rgb(48,62,83)]
+                        lg:px-[20%] xl:justify-between lg:h-[10vh] "
                     >
                         <GiHamburgerMenu className="text-4xl! text-white" />
 
@@ -149,7 +149,7 @@ const Home = () => {
                     </header>
 
                     <div
-                        className="h-full lg:h-[85vh] w-[95%] lg:w-[90%] 2xl:w-[80%] overflow-y-scroll lg:overflow-y-hidden text-[1rem]
+                        className="h-screen lg:h-[85vh] w-[95%] lg:w-[90%] 2xl:w-[80%] overflow-y-hidden
                         flex justify-center items-start"
                     >
                         {renderComponente()}

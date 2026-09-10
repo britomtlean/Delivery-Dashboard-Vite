@@ -56,32 +56,32 @@ const Estoque = () => {
         setRender(!render);
     };
 
-        const saida = async (id: string, quantidade: string, e: React.ChangeEvent<any>) => {
-            e.preventDefault();
-            if (!quantidade) return;
+    const saida = async (id: string, quantidade: string, e: React.ChangeEvent<any>) => {
+        e.preventDefault();
+        if (!quantidade) return;
 
-            const token = await getToken();
-            const form = new FormData();
-            form.append('quantidade', quantidade);
+        const token = await getToken();
+        const form = new FormData();
+        form.append('quantidade', quantidade);
 
-            const res = await fetch('https://dotnet-webapi-base-production.up.railway.app/api/produtos/saida/' + id, {
-                method: 'PUT',
-                headers: {
-                    Authorization: `Bearer ${JSON.parse(token)}`,
-                },
-                body: form,
-            });
+        const res = await fetch('https://dotnet-webapi-base-production.up.railway.app/api/produtos/saida/' + id, {
+            method: 'PUT',
+            headers: {
+                Authorization: `Bearer ${JSON.parse(token)}`,
+            },
+            body: form,
+        });
 
-            const data = await res.text();
+        const data = await res.text();
 
-            if(!res.ok){
-                console.log('Erro ao atualizar estoque');
-                return;
-            }
+        if(!res.ok){
+            console.log('Erro ao atualizar estoque');
+            return;
+        }
 
-            console.log(data);
-            setRender(!render);
-        };
+        console.log(data);
+        setRender(!render);
+    };
 
     //////////////////////////// SEARCH //////////////////////////////////
 
@@ -113,15 +113,19 @@ const Estoque = () => {
                 <option value="saida">Saida</option>
             </select>
 
-            <div className="w-full h-full flex justify-center gap-4 items-start">
+            <div
+                className="w-full h-full flex flex-col justify-center items-center gap-4
+                    lg:flex-row lg:items-start"
+            >
                 <table
-                    className="w-3/5 h-full max-h-[400px] p-5 lg:p-7
-                row-start-1 row-span-4 col-start-4 col-span-4
-                flex flex-col justify-start items-center
-                font-bold text-left
-                bg-radial from-blue-400/20 to-blue-500/20
-                shadow-xl/10 border border-white/0 rounded-3xl
-                hover:border-[3px] hover:border-[#64ffdd]"
+                    className="w-7/8 max-h-2/5 p-5
+                        row-start-1 row-span-4 col-start-4 col-span-4
+                        flex flex-col justify-start items-center
+                        font-bold text-left
+                        bg-radial from-blue-400/20 to-blue-500/20
+                        shadow-xl/10 border border-white/0 rounded-3xl
+                        hover:border-[3px] hover:border-[#64ffdd]
+                        lg:w-3/5 lg:max-h-[400px] lg:p-7"
                 >
                     <input
                         type="text"
@@ -132,7 +136,7 @@ const Estoque = () => {
                     />
 
                     <thead className="w-full">
-                        <tr className="w-full text-[1rem] grid grid-cols-3 py-2 bg-slate-200 rounded-t-lg px-2 lg:px-8 gap-x-50">
+                        <tr className="w-full text-[2rem] grid grid-cols-3 py-2 bg-slate-200 rounded-t-lg px-10 lg:px-8 gap-x-50">
                             <th>ID</th>
                             <th>Nome</th>
                             <th>Estoque</th>
@@ -142,7 +146,7 @@ const Estoque = () => {
                     <tbody className="w-full overflow-y-scroll rounded-b-lg text-[1rem]">
                         {dadosFiltrados?.map((item) => (
                             <tr
-                                className="grid grid-rows-2 grid-cols-3 px-2 lg:px-8 gap-x-50
+                                className="grid grid-rows-2 grid-cols-3 px-10 lg:px-8 gap-x-50
                           w-full py-3 bg-blue-200 border-b border-white
                           font-medium font-sans hover:bg-white "
                                 key={item.id}
@@ -160,7 +164,10 @@ const Estoque = () => {
                     </tbody>
                 </table>
 
-                <div className="w-1/2 h-full flex flex-col items-center justify-start gap-4 p-10 xl:w-[500px]">
+                <div
+                    className="w-7/8 h-full flex flex-col items-center justify-start gap-4 p-10
+                lg:w-[500px]"
+                >
                     {estoque == 'entrada' ? (
                         <h1 className="text-4xl! text-black! font-bold!">Entrada</h1>
                     ) : (
@@ -178,7 +185,7 @@ const Estoque = () => {
                             onChange={(e) => {
                                 setProdutoSelecionado(e.target.value);
                             }}
-                            className="w-full p-2 bg-gray-200 rounded-xl outline-none!"
+                            className="w-full p-5 lg:p-2 bg-gray-200 rounded-xl outline-none!"
                             type="search"
                             placeholder="Insira o ID do produto"
                             value={produtoSelecionado}
@@ -190,12 +197,12 @@ const Estoque = () => {
                                     return value;
                                 });
                             }}
-                            className="w-full p-2 bg-gray-200 rounded-xl outline-none!"
+                            className="w-full p-5 lg:p-2 bg-gray-200 rounded-xl outline-none!"
                             type="search"
                             placeholder="Insira a quantidade"
                             value={quantidadeSelecionada}
                         />
-                        <button type="submit">Salvar</button>
+                        <button className='py-5!' type="submit">Salvar</button>
                     </form>
                 </div>
             </div>

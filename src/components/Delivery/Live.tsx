@@ -1,6 +1,5 @@
-import { useEffect, useState, useRef, useContext } from 'react';
+import { useEffect, useContext } from 'react';
 import { Context } from '../../context/ContextProvider';
-import somPedido from '../../assets/meme-fail-alert-locran-1-00-01.mp3';
 
 declare global {
     interface Window {
@@ -12,18 +11,8 @@ declare global {
 export default function Live() {
 
     //CONTEXT
-    const { notify, setNotify, connection, setConnectionStatus, online,  ativarSom, audioRef, entrarNaSala } = useContext(Context)!;
+    const { notify, setNotify, connection, connectionStatus, setConnectionStatus, online,  ativarSom, audioRef, entrarNaSala } = useContext(Context)!;
 
-
-    const agora = new Date();
-
-    const hora = Number(
-        new Intl.DateTimeFormat('pt-BR', {
-            timeZone: 'America/Sao_Paulo',
-            hour: 'numeric',
-            hour12: false,
-        }).format(agora)
-    );
 
     /////////////////////// AUDIO \\\\\\\\\\\\\\\\\\\\\\\\\\\
 
@@ -161,14 +150,7 @@ export default function Live() {
                 .then(() => {
                     setConnectionStatus(true);
 
-
-                    if (hora >= 8 && hora <24) {
-                        entrarNaSala();
-                        console.log('Horário válido!');
-                    } else {
-                        console.log('Fora do horário permitido.');
-                    }
-
+                    entrarNaSala();
 
                     console.log('Status: Conectado.')
                 })
@@ -187,7 +169,6 @@ export default function Live() {
     },[connection])
 
     useEffect(() => {
-
         const verificarConexao = async () => {
             console.log('Verificando conexão...');
 
@@ -196,15 +177,9 @@ export default function Live() {
             console.log('Conectando...');
 
             await connection?.start().then(() => {
-
                 setConnectionStatus(true);
 
-                    if (hora >= 8 && hora < 24) {
-                        entrarNaSala();
-                        console.log('Horário válido!');
-                    } else {
-                        console.log('Fora do horário permitido.');
-                    }
+                entrarNaSala();
             });
         };
 
@@ -221,11 +196,11 @@ export default function Live() {
             verificarConexao();
         }, 15000);
 
-            return () => {
-                clearInterval(intervalo);
-            };
-
+        return () => {
+            clearInterval(intervalo);
+        };
     }, [navigator.onLine]);
+
 
     return (
         <div className="h-full w-full overflow-hidden flex flex-col items-center">

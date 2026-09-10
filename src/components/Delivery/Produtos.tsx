@@ -165,14 +165,14 @@ const Produtos = ({ render }: Prop) => {
 
     return (
         <div
-            className="w-full h-full border-t-2 border-white py-20
+            className="w-full h-full border-t-2 border-white pt-10 pb-60 border-b-2
             flex flex-col justify-start items-center overflow-y-scroll gap-10
-            lg:overflow-hidden lg:p-10 lg:grid lg:grid-cols-7 lg:grid-rows-5 lg:gap-y-5 lg:gap-x-8 lg:overflow-y-hidden"
+            lg:overflow-hidden lg:p-10 lg:grid lg:grid-cols-7 lg:grid-rows-5 lg:gap-y-5 lg:gap-x-8 lg:overflow-y-hidden lg:py-20"
         >
-            <div className="w-full h-3/5 lg:h-3/4 lg:w-8/9 row-start-1 row-span-3 col-start-1 col-span-3 relative -top-10">
+            <div className="w-full h-2/5 lg:h-3/4 lg:w-8/9 row-start-1 row-span-3 col-start-1 col-span-3 lg:relative -top-10">
                 <h1
                     className="
-                    text-lg lg:text-3xl!
+                    text-4xl!
                     text-black!
                     font-black font-sans!
                     mb-4 text-center
@@ -181,9 +181,11 @@ const Produtos = ({ render }: Prop) => {
                 >
                     Mais vendidos
                 </h1>
+
                 <div
-                    className="relative w-full h-full
-                    flex items-center justify-center"
+                    className="relative w-full h-3/4
+                    flex items-center justify-center
+                    lg:h-full"
                 >
                     <button
                         onClick={returnProduct}
@@ -251,7 +253,8 @@ const Produtos = ({ render }: Prop) => {
             >
                 <h1 className="text-3xl! text-black! font-sans font-light">Total de vendas:</h1>
 
-                <div className="text-1xl bg-white/30 w-full h-full py-8 text-center rounded-3xl flex justify-center items-center">
+                <div className="text-1xl bg-white/30 w-full h-full py-20 text-center rounded-3xl flex justify-center items-center
+                lg:py-8">
                     <h2 className="text-red-600 font-extrabold font-sans text-2xl">
                         {firstProduct?.quantidadeVendida || 0} Produtos vendidos
                     </h2>

@@ -35,32 +35,65 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
     const [connection, setConnection] = useState<HubConnection | null>(null);
     const [connectionStatus, setConnectionStatus] = useState<boolean |null>(null);
     const [online, setOnline] = useState<boolean>(false);
+    const loginRef = useRef<User | null>(null);
 
     //******* */
     const [somAtivado, setSomAtivado] = useState(false);
     const audioRef = useRef<HTMLAudioElement | null>(null);
 
-    const entrarNaSala = async () => {
-        console.log(connection?.state);
+    //*****HORA ******/
+    const agora = new Date();
 
-        if (!connection) return;
+    const hora = Number(
+        new Intl.DateTimeFormat('pt-BR', {
+            timeZone: 'America/Sao_Paulo',
+            hour: 'numeric',
+            hour12: false,
+        }).format(agora)
+    );
 
-        //AJUSTAR
-        if (connection.state === 'Disconnected') {
-            alert('Conexão indisponível');
-            return;
-        }
+const entrarNaSala = async (conn?: HubConnection) => {
+    const conexao = conn ?? connection;
 
-        if (online) {
-            await connection.invoke('SairSala', login?.user);
-            setOnline(false);
-            return;
-        }
+    if (!conexao) {
+        console.log('❌ Conexão não disponível');
+        return;
+    }
 
-        await connection.invoke('EntrarSala', JSON.stringify({ sala: login?.user, chaveAcesso: 'delivery1234' }));
+    if (conexao.state !== 'Connected') {
+        console.log('❌ SignalR não está conectado:', conexao.state);
+        return;
+    }
 
-        //////////////////////////////////////////////
-    };
+    const usuario = loginRef.current;
+
+    if (!usuario?.user) {
+        console.log('❌ Login não disponível');
+        return;
+    }
+
+    if (online) {
+        await conexao.invoke('SairSala', usuario.user);
+
+        setOnline(false);
+
+        return;
+    }
+
+    if (hora >= 8 && hora < 24) {
+        await conexao.invoke(
+            'EntrarSala',
+            JSON.stringify({
+                sala: usuario.user,
+                chaveAcesso: 'delivery1234',
+            })
+        );
+
+        console.log('✅ Solicitação para entrar na sala enviada');
+    } else {
+        console.log('⏰ Fora do horário permitido');
+    }
+};
 
     const ativarSom = async () => {
 
@@ -123,13 +156,10 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
             });
 
             newConnection.onreconnected(async (connectionId) => {
+
                 console.log('🟢 RECONNECTED:', connectionId);
-
-                setConnectionStatus((prev: any) => {
-                    return true;
-                });
-
-                await entrarNaSala();
+                setConnectionStatus(true);
+                await entrarNaSala(newConnection);
             });
 
             newConnection.on('Erro', async (mensagem: string) => {
@@ -145,6 +175,10 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
             setConnection(newConnection);
 
     },[])
+
+    useEffect(() => {
+        loginRef.current = login;
+    }, [login]);
 
     return (
         <Context.Provider
