@@ -131,11 +131,11 @@ const entrarNaSala = async (conn?: HubConnection) => {
 
             const newConnection = new HubConnectionBuilder()
                 .withUrl('https://dotnet-webapi-base-production.up.railway.app/chat')
-                .withAutomaticReconnect()
+                .withAutomaticReconnect([0, 2000, 5000, 10000, 30000])
                 .build();
 
-            newConnection.serverTimeoutInMilliseconds = 30000;
-            newConnection.keepAliveIntervalInMilliseconds = 5000;
+            newConnection.serverTimeoutInMilliseconds = 90000;
+            newConnection.keepAliveIntervalInMilliseconds = 30000;
 
             newConnection.onclose(async (error) => {
                 console.error('🔴 DESCONNECTED:', error);
