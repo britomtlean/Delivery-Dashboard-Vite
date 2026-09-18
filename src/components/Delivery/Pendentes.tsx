@@ -1,4 +1,5 @@
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
+import { Context } from "../../context/ContextProvider";
 
 interface ProdutoPedido {
     produtoId: string;
@@ -21,6 +22,8 @@ interface Pedido {
 }
 
 export default function Pendentes() {
+
+    const { notify } = useContext(Context)!;
 
     const [vendas, setVendas] = useState<Pedido[]>([]);
     const [ultimaLista, setUltimaLista] = useState<string>("");
@@ -122,12 +125,7 @@ async function carregarPedidos(): Promise<void> {
     useEffect(() => {
         carregarPedidos();
 
-        const interval = setInterval(() => {
-            carregarPedidos();
-        }, 20000);
-
-        return () => clearInterval(interval);
-    }, []);
+    }, [notify]);
 
     /************** FILTRO **************/
 

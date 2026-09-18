@@ -92,7 +92,7 @@ export default function Confirmados() {
 
         const interval = setInterval(() => {
             carregarPedidos();
-        }, 20000);
+        }, 15000);
 
         return () => clearInterval(interval);
     }, []);
