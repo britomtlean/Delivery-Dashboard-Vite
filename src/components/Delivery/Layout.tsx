@@ -5,7 +5,7 @@ import Confirmados from './Confirmados';
 import Produtos from './Produtos';
 import Live from './Live';
 import CriarProduto from './CriarProduto';
-import Loading from '../../components/All/Loading';
+import Loading from '../All/Loading';
 import { GiHamburgerMenu } from 'react-icons/gi';
 
 import { Context } from '../../context/ContextProvider';
@@ -13,8 +13,9 @@ import { useNavigate } from 'react-router-dom';
 import { deleteToken } from '../../Services/Storage';
 import Estoque from './Estoque';
 import Profile from './Profile';
+import Categorias from './Categorias';
 
-const Home = () => {
+const Layout = () => {
 
     //CONTEXT
     const { login, setLogin, connectionStatus } = useContext(Context)!;
@@ -23,16 +24,13 @@ const Home = () => {
     const navigate = useNavigate();
 
     useEffect(() => {
-
         if (login == null) {
-
             setTimeout(() => {
                 navigate('/auth');
             }, 2000);
 
             return;
         }
-
     }, [login]);
 
     //********************** ADICIONAR AO CONTEXT *************************/
@@ -53,6 +51,8 @@ const Home = () => {
                 return <CriarProduto render={setSection} />;
             case 'estoque':
                 return <Estoque />;
+            case 'categorias':
+                return <Categorias />;
             case 'profile':
                 return <Profile />;
             default:
@@ -67,7 +67,7 @@ const Home = () => {
             {login ? (
                 <>
                     <header
-                        className="w-full h-[8vh] gap-5 py-4 flex justify-center items-center px-[5%] mb-4 bg-[rgb(48,62,83)]
+                        className="w-full h-[8vh] gap-5 py-4 flex justify-center items-center px-[5%] mb-4 bg-[rgba(48,62,83,0.47)]
                         lg:px-[20%] xl:justify-between lg:h-[10vh] "
                     >
                         <GiHamburgerMenu className="text-4xl! text-white" />
@@ -106,6 +106,13 @@ const Home = () => {
                                 className="ml-[30px] list-none cursor-pointer text-lg! font-bold! text-[#ccc] transition-all hover:border-b-4  hover:border-red-500 hover:text-red-500"
                             >
                                 Estoque
+                            </li>
+
+                            <li
+                                onClick={() => setSection('categorias')}
+                                className="hidden md:block ml-[30px] text-lg! list-none cursor-pointer font-bold! text-[#ccc] transition-all hover:border-b-4  hover:border-red-500 hover:text-red-500"
+                            >
+                                Categorias
                             </li>
 
                             <li
@@ -149,8 +156,9 @@ const Home = () => {
                     </header>
 
                     <div
-                        className="h-screen lg:h-[85vh] w-[95%] lg:w-[90%] 2xl:w-[80%] overflow-y-hidden
-                        flex justify-center items-start"
+                        className="h-screen w-[95%] p-10 overflow-y-hidden border-2 border-slate-500 rounded-3xl
+                        flex justify-center items-start
+                        lg:h-[90vh] lg:w-[90%] 2xl:w-[80%]"
                     >
                         {renderComponente()}
                     </div>
@@ -162,4 +170,4 @@ const Home = () => {
     );
 };
 
-export default Home;
+export default Layout;

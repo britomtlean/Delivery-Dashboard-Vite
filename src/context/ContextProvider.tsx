@@ -18,8 +18,12 @@ export type ContextType = {
     online: boolean;
     setOnline: React.Dispatch<SetStateAction<boolean>>;
     ativarSom: () => void;
-    audioRef: RefObject<HTMLAudioElement | null>
+    audioRef: RefObject<HTMLAudioElement | null>;
     entrarNaSala: () => Promise<void>;
+    background: string;
+    setBackground: React.Dispatch<React.SetStateAction<string>>;
+    backgroundSecond: string;
+    setBackgroundSecond: React.Dispatch<React.SetStateAction<string>>;
 };
 
 
@@ -28,14 +32,19 @@ export const Context: React.Context<ContextType | null> = createContext<ContextT
 /************************************************************************************** */
 
 export const ContextProvider = ({ children }: PropsWithChildren) => {
-
     const [contato, setContato] = useState<string>('');
     const [notify, setNotify] = useState<Array<Record<string, any>> | null>(null);
     const [login, setLogin] = useState<User | null>(null);
     const [connection, setConnection] = useState<HubConnection | null>(null);
-    const [connectionStatus, setConnectionStatus] = useState<boolean |null>(null);
+    const [connectionStatus, setConnectionStatus] = useState<boolean | null>(null);
     const [online, setOnline] = useState<boolean>(false);
     const loginRef = useRef<User | null>(null);
+    const [background, setBackground] = useState<string>('#2a2342');
+    const [backgroundSecond, setBackgroundSecond] = useState<string>('#422f80');
+    //#2a2342
+    //#60a7a7
+    //#422f80
+    //#69a87e
 
     //******* */
     const [somAtivado, setSomAtivado] = useState(false);
@@ -52,51 +61,50 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
         }).format(agora)
     );
 
-const entrarNaSala = async (conn?: HubConnection) => {
-    const conexao = conn ?? connection;
+    const entrarNaSala = async (conn?: HubConnection) => {
+        const conexao = conn ?? connection;
 
-    if (!conexao) {
-        console.log('❌ Conexão não disponível');
-        return;
-    }
+        if (!conexao) {
+            console.log('❌ Conexão não disponível');
+            return;
+        }
 
-    if (conexao.state !== 'Connected') {
-        console.log('❌ SignalR não está conectado:', conexao.state);
-        return;
-    }
+        if (conexao.state !== 'Connected') {
+            console.log('❌ SignalR não está conectado:', conexao.state);
+            return;
+        }
 
-    const usuario = loginRef.current;
+        const usuario = loginRef.current;
 
-    if (!usuario?.user) {
-        console.log('❌ Login não disponível');
-        return;
-    }
+        if (!usuario?.user) {
+            console.log('❌ Login não disponível');
+            return;
+        }
 
-    if (online) {
-        await conexao.invoke('SairSala', usuario.user);
+        if (online) {
+            await conexao.invoke('SairSala', usuario.user);
 
-        setOnline(false);
+            setOnline(false);
 
-        return;
-    }
+            return;
+        }
 
-    if (hora >= 8 && hora < 24) {
-        await conexao.invoke(
-            'EntrarSala',
-            JSON.stringify({
-                sala: usuario.user,
-                chaveAcesso: 'delivery1234',
-            })
-        );
+        if (hora >= 8 && hora < 24) {
+            await conexao.invoke(
+                'EntrarSala',
+                JSON.stringify({
+                    sala: usuario.user,
+                    chaveAcesso: 'delivery1234',
+                })
+            );
 
-        console.log('✅ Solicitação para entrar na sala enviada');
-    } else {
-        console.log('⏰ Fora do horário permitido');
-    }
-};
+            console.log('✅ Solicitação para entrar na sala enviada');
+        } else {
+            console.log('⏰ Fora do horário permitido');
+        }
+    };
 
     const ativarSom = async () => {
-
         try {
             const audio = new Audio(somPedido);
             audio.volume = 1;
@@ -117,68 +125,69 @@ const entrarNaSala = async (conn?: HubConnection) => {
             setSomAtivado(true);
 
             console.log('✅ Som ativado');
-
         } catch (err) {
             console.error('Erro:', err);
         }
     };
 
     useEffect(() => {
+        if (connection) return;
 
-            if(connection) return
+        console.log('Conexão declarada.');
 
-            console.log("Conexão declarada.");
+        const newConnection = new HubConnectionBuilder()
+            .withUrl('https://dotnet-webapi-base-production.up.railway.app/chat')
+            .withAutomaticReconnect([0, 2000, 5000, 10000, 30000])
+            .build();
 
-            const newConnection = new HubConnectionBuilder()
-                .withUrl('https://dotnet-webapi-base-production.up.railway.app/chat')
-                .withAutomaticReconnect([0, 2000, 5000, 10000, 30000])
-                .build();
+        newConnection.serverTimeoutInMilliseconds = 90000;
+        newConnection.keepAliveIntervalInMilliseconds = 30000;
 
-            newConnection.serverTimeoutInMilliseconds = 90000;
-            newConnection.keepAliveIntervalInMilliseconds = 30000;
+        newConnection.onclose(async (error) => {
+            console.error('🔴 DESCONNECTED:', error);
 
-            newConnection.onclose(async (error) => {
-                console.error('🔴 DESCONNECTED:', error);
+            if (newConnection.state !== 'Disconnected') {
+                await newConnection.stop();
+            }
 
-                if (newConnection.state !== 'Disconnected') {
-                    await newConnection.stop();
-                }
+            setConnectionStatus(false);
+            setOnline(false);
+        });
 
-                setConnectionStatus(false);
-                setOnline(false);
-            });
+        newConnection.onreconnecting((error) => {
+            console.warn('🟡 RECONNECTING:', error);
 
-            newConnection.onreconnecting((error) => {
-                console.warn('🟡 RECONNECTING:', error);
+            setConnectionStatus(null);
+            setOnline(false);
+        });
 
-                setConnectionStatus(null);
-                setOnline(false);
-            });
+        newConnection.onreconnected(async (connectionId) => {
+            console.log('🟢 RECONNECTED:', connectionId);
+            setConnectionStatus(true);
+            await entrarNaSala(newConnection);
+        });
 
-            newConnection.onreconnected(async (connectionId) => {
+        newConnection.on('Erro', async (mensagem: string) => {
+            console.error('❌ Servidor:', mensagem);
+            setOnline(false);
+        });
 
-                console.log('🟢 RECONNECTED:', connectionId);
-                setConnectionStatus(true);
-                await entrarNaSala(newConnection);
-            });
+        newConnection.on('Conectado', (msg: string) => {
+            console.log(msg);
+            setOnline(true);
+        });
 
-            newConnection.on('Erro', async (mensagem: string) => {
-                console.error('❌ Servidor:', mensagem);
-                setOnline(false);
-            });
-
-            newConnection.on('Conectado', (msg: string) => {
-                console.log(msg);
-                setOnline(true);
-            });
-
-            setConnection(newConnection);
-
-    },[])
+        setConnection(newConnection);
+    }, []);
 
     useEffect(() => {
         loginRef.current = login;
     }, [login]);
+
+    useEffect(() => {
+        document.documentElement.style.setProperty('--cor-primaria', background);
+        document.documentElement.style.setProperty('--cor-secundaria', backgroundSecond);
+    }, [background, backgroundSecond, login]);
 
     return (
         <Context.Provider
@@ -197,7 +206,11 @@ const entrarNaSala = async (conn?: HubConnection) => {
                 setOnline,
                 ativarSom,
                 audioRef,
-                entrarNaSala
+                entrarNaSala,
+                background,
+                setBackground,
+                backgroundSecond,
+                setBackgroundSecond,
             }}
         >
             {children}

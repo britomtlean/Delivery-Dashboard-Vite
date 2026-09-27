@@ -19,7 +19,7 @@ font-size: 0.8rem;
     /*bg-radial from-blue-400/50 to-blue-500/80
     flex flex-col items-center font-sans
     */
-    bg-gradient-to-b from-[#60a7a7] to-[#69a87e]
+    bg-gradient-to-b from-[var(--cor-primaria)] to-[var(--cor-secundaria)]
 }
 
 h1 {
@@ -32,7 +32,7 @@ button {
     outline: none;
     border: 1px solid transparent;
     padding: 0.6em 1.2em;
-    font-size: 1em;
+    font-size: 1rem;
     font-weight: 500;
     font-family: inherit;
     background-color: #43626b;
@@ -53,17 +53,17 @@ button:hover {
     }
 
     25% {
-        color: #5e3757;
+        color: rgb(255, 136, 1);
         text-shadow:
-            0 0 8px #5e3757,
-            0 0 16px #5e3757;
+            0 0 8px rgb(240, 147, 41),
+            0 0 16px rgb(236, 165, 83);
     }
 
     50% {
-        color: #370aff;
+        color: #ffe60a;
         text-shadow:
-            0 0 8px #530aff,
-            0 0 16px #740aff;
+            0 0 8px #d1be10,
+            0 0 16px #ffd20a;
     }
 
     75% {

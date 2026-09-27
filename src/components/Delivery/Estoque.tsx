@@ -98,13 +98,15 @@ const Estoque = () => {
 
     return (
         <div
-            className="w-full h-screen pt-10
+            className="w-full h-full
             flex flex-col justify-start items-center gap-4"
         >
             <select
                 name=""
                 id=""
-                className="w-1/2 bg-slate-200 p-4 rounded-xl mb-5"
+                className="w-1/2 bg-slate-200 p-4 rounded-xl mb-5
+                shadow-xl/10 border border-white/0 rounded-3xl
+                hover:border-[3px] hover:border-[#64ffdd]"
                 onChange={(e) => {
                     setEstoque(e.target.value);
                 }}
@@ -169,9 +171,9 @@ const Estoque = () => {
                 lg:w-[500px]"
                 >
                     {estoque == 'entrada' ? (
-                        <h1 className="text-4xl! text-black! font-bold!">Entrada</h1>
+                        <h1 className="text-4xl! text-white! font-bold!">Entrada</h1>
                     ) : (
-                        <h1 className="text-4xl! text-black! font-bold!">Saída</h1>
+                        <h1 className="text-4xl! text-white! font-bold!">Saída</h1>
                     )}
                     <form
                         onSubmit={(e) => {
@@ -185,7 +187,7 @@ const Estoque = () => {
                             onChange={(e) => {
                                 setProdutoSelecionado(e.target.value);
                             }}
-                            className="w-full p-5 lg:p-2 bg-gray-200 rounded-xl outline-none!"
+                            className="w-full p-5 lg:p-2 bg-gray-200 rounded-lg outline-none! text-xl! text-center"
                             type="search"
                             placeholder="Insira o ID do produto"
                             value={produtoSelecionado}
@@ -197,12 +199,14 @@ const Estoque = () => {
                                     return value;
                                 });
                             }}
-                            className="w-full p-5 lg:p-2 bg-gray-200 rounded-xl outline-none!"
+                            className="w-full p-5 lg:p-2 bg-gray-200 rounded-lg outline-none! text-xl! text-center"
                             type="search"
                             placeholder="Insira a quantidade"
                             value={quantidadeSelecionada}
                         />
-                        <button className='py-5!' type="submit">Salvar</button>
+                        <button className="py-3!" type="submit">
+                            Salvar
+                        </button>
                     </form>
                 </div>
             </div>

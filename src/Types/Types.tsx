@@ -25,6 +25,7 @@ export type User = {
     endereco?: string;
     horario?: string;
     background?: string;
+    backgroundSecond?: string;
     whatsApp?: string;
     instagram?: string;
     color?: string;

@@ -167,13 +167,13 @@ const Produtos = ({ render }: Prop) => {
         <div
             className="w-full h-full border-t-2 border-white pt-10 pb-60 border-b-2
             flex flex-col justify-start items-center overflow-y-scroll gap-10
-            lg:overflow-hidden lg:p-10 lg:grid lg:grid-cols-7 lg:grid-rows-5 lg:gap-y-5 lg:gap-x-8 lg:overflow-y-hidden lg:py-20"
+            lg:overflow-hidden lg:p-10 lg:grid lg:grid-cols-7 lg:grid-rows-5 lg:gap-y-5 lg:gap-x-8 lg:overflow-y-hidden"
         >
             <div className="w-full h-2/5 lg:h-3/4 lg:w-8/9 row-start-1 row-span-3 col-start-1 col-span-3 lg:relative -top-10">
                 <h1
                     className="
                     text-4xl!
-                    text-black!
+                    text-white!
                     font-black font-sans!
                     mb-4 text-center
                     [transform:perspective(200px)_rotateX(10deg)]
@@ -221,7 +221,7 @@ const Produtos = ({ render }: Prop) => {
 
                                 <h2 className="mt-4 text-black text-xl! font-black">{firstProduct.nome}</h2>
 
-                                <h2 className="text-gray-800 text-xl! font-bold">
+                                <h2 className="text-white text-xl! font-bold">
                                     {Number(firstProduct.valor).toLocaleString('pt-BR', {
                                         style: 'currency',
                                         currency: 'BRL',
@@ -245,17 +245,17 @@ const Produtos = ({ render }: Prop) => {
             </div>
 
             <div
-                className="p-4 h-full w-8/9 lg:h-4/5 lg:relative -top-10
+                className="p-5 h-full w-8/9 lg:h-4/5 lg:relative -top-10
                 flex flex-col justify-center items-center gap-2
                 col-start-1 col-span-3 row-start-4 row-span-2
                 bg-radial from-blue-400/20 to-blue-500/20 shadow-xl/30 border border-white rounded-3xl
                 hover:border-[3px] hover:border-[#64ffdd]"
             >
-                <h1 className="text-3xl! text-black! font-sans font-light">Total de vendas:</h1>
+                <h1 className="text-3xl! text-white! font-sans font-bold">Total de vendas:</h1>
 
-                <div className="text-1xl bg-white/30 w-full h-full py-20 text-center rounded-3xl flex justify-center items-center
+                <div className="bg-white/30 w-full h-full py-15 text-center rounded-3xl flex justify-center items-center
                 lg:py-8">
-                    <h2 className="text-red-600 font-extrabold font-sans text-2xl">
+                    <h2 className="text-red-600 font-extrabold font-sans text-2xl!">
                         {firstProduct?.quantidadeVendida || 0} Produtos vendidos
                     </h2>
                 </div>

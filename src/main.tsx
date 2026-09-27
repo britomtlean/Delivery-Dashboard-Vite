@@ -11,7 +11,7 @@ import { ContextProvider } from './context/ContextProvider';
 
 //COMPONENTS
 import Login from './components/All/Login.tsx';
-import Home from './components/Delivery/Home.tsx';
+import Layout from './components/Delivery/Layout.tsx';
 import EditarProoduto from './components/Delivery/EditarProduto.tsx';
 
 registerSW({
@@ -21,7 +21,7 @@ registerSW({
 let router = createBrowserRouter([
     {
         path: '/',
-        element: <Home />,
+        element: <Layout />,
     },
     {
         path: '/auth/',
@@ -35,8 +35,8 @@ let router = createBrowserRouter([
 
 createRoot(document.getElementById('root')!).render(
     //<StrictMode>
-        <ContextProvider>
-            <RouterProvider router={router} />
-        </ContextProvider>
+    <ContextProvider>
+        <RouterProvider router={router} />
+    </ContextProvider>
     //</StrictMode>
 );

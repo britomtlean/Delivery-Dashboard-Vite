@@ -119,11 +119,11 @@ const EditarProduto = () => {
         const data = await res.text();
 
         if (!res.ok) {
-            alert(data);
+            console.log(data);
             return
         }
 
-        alert('Produto atualizado com sucesso');
+        console.log('Produto atualizado com sucesso');
 
         await getProducts();
         setDisplay(false);
