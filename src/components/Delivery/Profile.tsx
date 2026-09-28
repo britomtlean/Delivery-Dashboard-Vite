@@ -132,7 +132,7 @@ const Profile = () => {
             flex flex-col justify-start items-center gap-4"
         >
             <div>
-                <FaUser className="text-5xl!" />
+                <FaUser className="text-5xl! text-white!" />
             </div>
 
             <form

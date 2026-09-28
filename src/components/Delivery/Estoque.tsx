@@ -1,33 +1,17 @@
-import React, { useEffect, useState } from 'react'
+import React, { useContext, useEffect, useState } from 'react'
 import { getToken } from '../../Services/Storage';
 import type { Product } from '../../Types/Types';
 import { Link } from 'react-router-dom';
+import { Context } from '../../context/ContextProvider';
 
 const Estoque = () => {
 
-    const [produtos, setProdutos] = useState<Array<Product> | null>(null);
+     const { produtosList, setRender, render } = useContext(Context)!;
+
     const [produtoSelecionado, setProdutoSelecionado] = useState<string>('');
     const [quantidadeSelecionada, setQuantidadeSelecionada] = useState<string>('');
     const [estoque, setEstoque] = useState<string>('entrada');
     const [busca, setBusca] = useState<string>('');
-    const [render, setRender] = useState<boolean>(true);
-
-
-    const getProducts = async () => {
-        const token = await getToken();
-        const res = await fetch('https://dotnet-webapi-base-production.up.railway.app/api/Produtos', {
-            headers: {
-                Authorization: `Bearer ${JSON.parse(token)}`,
-            },
-        });
-
-        const data = await res.json();
-
-        setProdutos(() => {
-            console.log(data);
-            return data;
-        });
-    };
 
     const entrada = async (id: string, quantidade: string, e: React.ChangeEvent<any>) => {
         e.preventDefault();
@@ -85,16 +69,12 @@ const Estoque = () => {
 
     //////////////////////////// SEARCH //////////////////////////////////
 
-    const dadosFiltrados = produtos?.filter((item) => {
+    const dadosFiltrados = produtosList?.filter((item) => {
         const texto = busca.toLowerCase();
         return item.nome.toLowerCase().includes(texto) || String(item.valor).includes(texto);
     });
 
     ////////////////////////////////////////////////////////////////////
-
-    useEffect(() => {
-        getProducts();
-    }, [render]);
 
     return (
         <div

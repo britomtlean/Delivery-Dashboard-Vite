@@ -1,66 +1,36 @@
-import { useState, useEffect, type ReactNode, type Dispatch, type SetStateAction } from 'react';
+import { useState, useEffect, type ReactNode, type Dispatch, type SetStateAction, useContext } from 'react';
 import { Link } from 'react-router-dom';
 import { FaAngleLeft } from 'react-icons/fa';
 import { FaAngleRight } from 'react-icons/fa';
 import { getToken } from '../../Services/Storage';
 import type { Product } from '../../Types/Types';
+import { Context } from '../../context/ContextProvider';
 
 
 type Prop = {
     render: Dispatch<SetStateAction<string>>;
 };
 
-interface ProdutoPedido {
-    produtoId: string;
-    nome: string;
-    quantidade: number;
-    valorUnitario: number;
-    subtotal: number;
-}
-
-interface Pedido {
-    id: string;
-    dataOriginal: string;
-    data: string;
-    valorTotal: number;
-    status: boolean | null;
-    nomeCliente: string;
-    contatoCliente: string;
-    enderecoCliente: string;
-    produtos: ProdutoPedido[];
-}
-
 const Produtos = ({ render }: Prop) => {
+
+     const { produtosList } = useContext(Context)!;
+
     // PRODUCTS
     const [produtos, setProdutos] = useState<Array<Product> | null>(null);
     const [top3, setTop3] = useState<Array<Product> | null>(null);
     const [firstProduct, setFirstProduct] = useState<Record<string, any> | null>(null);
 
     const [busca, setBusca] = useState<string>('');
-    const [produtosList, setProdutosList] = useState<Array<Product> | null>(null);
 
     useEffect(() => {
 
-        const getProducts = async () => {
+        maisVendidos(produtosList);
 
-            const token = await getToken();
-            const res = await fetch('https://dotnet-webapi-base-production.up.railway.app/api/Produtos', {
-                headers: {
-                    Authorization: `Bearer ${JSON.parse(token)}`,
-                },
-            });
+        setProdutos(() => {
+            console.log(produtosList);
+            return produtosList;
+        });
 
-            const data = await res.json();
-
-            maisVendidos(data);
-            setProdutos(() => {
-                console.log(data);
-                return data;
-            });
-            setProdutosList(data);
-        };
-
-        getProducts();
     }, []);
 
     useEffect(() => {
@@ -89,7 +59,7 @@ const Produtos = ({ render }: Prop) => {
         setTop3(newArray);
     };
 
-    async function maisVendidos(dataProduto: Product[]): Promise<void> {
+    async function maisVendidos(dataProduto: Product[] | null): Promise<void> {
         try {
             const token = await getToken();
             const res = await fetch('https://dotnet-webapi-base-production.up.railway.app/api/pedido', {
@@ -190,7 +160,7 @@ const Produtos = ({ render }: Prop) => {
                     <button
                         onClick={returnProduct}
                         className="lg:absolute left-3 z-10
-                        size-10 rounded-full h-[60px] w-[60px] mr-4
+                        size-10 rounded-full h-[60px] w-[60px] mr-4 bg-cyan-600!
                         text-white backdrop-blur-sm
                         flex items-center justify-center
                         transition-all hover:scale-110"
@@ -219,7 +189,7 @@ const Produtos = ({ render }: Prop) => {
                                     alt={firstProduct.nome}
                                 />
 
-                                <h2 className="mt-4 text-black text-xl! font-black">{firstProduct.nome}</h2>
+                                <h2 className="mt-4 text-cyan-300 text-xl! font-black">{firstProduct.nome}</h2>
 
                                 <h2 className="text-white text-xl! font-bold">
                                     {Number(firstProduct.valor).toLocaleString('pt-BR', {
@@ -234,7 +204,7 @@ const Produtos = ({ render }: Prop) => {
                     <button
                         onClick={nextProduct}
                         className="lg:absolute right-3 z-10
-                        size-10 rounded-full h-[60px] w-[60px] ml-4
+                        size-10 rounded-full h-[60px] w-[60px] ml-4 bg-cyan-600!
                         text-white backdrop-blur-sm
                         flex items-center justify-center
                         transition-all hover:scale-110"
@@ -253,9 +223,11 @@ const Produtos = ({ render }: Prop) => {
             >
                 <h1 className="text-3xl! text-white! font-sans font-bold">Total de vendas:</h1>
 
-                <div className="bg-white/30 w-full h-full py-15 text-center rounded-3xl flex justify-center items-center
-                lg:py-8">
-                    <h2 className="text-red-600 font-extrabold font-sans text-2xl!">
+                <div
+                    className="bg-white/30 w-full h-full py-15 text-center rounded-3xl flex justify-center items-center
+                lg:py-8"
+                >
+                    <h2 className="text-yellow-400 font-extrabold font-sans text-2xl!">
                         {firstProduct?.quantidadeVendida || 0} Produtos vendidos
                     </h2>
                 </div>

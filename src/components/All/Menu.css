@@ -1,0 +1,112 @@
+
+
+/* Botão abrir */
+.botao-menu {
+  color: white;
+  border: none;
+  font-size: 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  z-index: 1001;
+  transition: background 0.3s;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.botao-menu:hover {
+  color: #028d92;
+}
+
+/* Overlay escuro */
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  z-index: 1000;
+}
+
+/* Menu lateral */
+.menu-lateral {
+  position: fixed;
+  top: 0;
+  left: -400px; /* começa fora da tela */
+  width: 350px;
+  height: 100%;
+  background: #2a2342;
+  box-shadow: 1px 0 16px #00f6ff;
+  transition: left 0.8s ease;
+  z-index: 1002;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-lateral.ativo {
+  left: 0; /* entra na tela */
+}
+
+/* Cabeçalho */
+.menu-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 15px 0;
+  overflow: hidden;
+  border-bottom: 1px solid #ddd;
+}
+
+.menu-header h2 {
+  text-align: center;
+  margin: 0 10px;
+  font-size: 1.2rem;
+}
+
+/* Botão fechar */
+.fechar {
+  background: none;
+  border: none;
+  font-size: 24px;
+  color: #666;
+  cursor: pointer;
+  transition: color 0.3s;
+}
+
+.fechar:hover {
+  color: #019b9b;
+}
+
+/* Itens do menu */
+.menu-lateral ul {
+  list-style: none;
+  padding: 15px 25px;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+}
+
+.menu-lateral li {
+  margin-bottom: 12px;
+  border-radius: 8px;
+  background: #006468;
+  width: 100%;
+  padding: 4% 0;
+}
+
+.menu-lateral a {
+  text-decoration: none;
+  color: #ffffff;
+  font-size: 1rem;
+  display: block;
+  padding: 8px;
+  border-radius: 4px;
+  transition: background 0.3s, color 0.3s;
+}
+
+.menu-lateral a:hover {
+  background: #007bff;
+  color: #fff;
+}

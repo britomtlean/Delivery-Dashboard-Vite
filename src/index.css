@@ -53,10 +53,10 @@ button:hover {
     }
 
     25% {
-        color: rgb(255, 136, 1);
+        color: #69ff3b;
         text-shadow:
-            0 0 8px rgb(240, 147, 41),
-            0 0 16px rgb(236, 165, 83);
+            0 0 8px #69ff3b,
+            0 0 16px #69ff3b;
     }
 
     50% {
@@ -67,17 +67,17 @@ button:hover {
     }
 
     75% {
+        color: rgb(255, 136, 1);
+        text-shadow:
+            0 0 8px rgb(240, 147, 41),
+            0 0 16px rgb(236, 165, 83);
+    }
+
+    100% {
         color: #ff4d6d;
         text-shadow:
             0 0 8px #ff4d6d,
             0 0 16px #ff4d6d;
-    }
-
-    100% {
-        color: #ff3b3b;
-        text-shadow:
-            0 0 8px #ff3b3b,
-            0 0 16px #ff3b3b;
     }
 }
 

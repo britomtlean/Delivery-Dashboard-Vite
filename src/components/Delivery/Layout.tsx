@@ -14,6 +14,7 @@ import { deleteToken } from '../../Services/Storage';
 import Estoque from './Estoque';
 import Profile from './Profile';
 import Categorias from './Categorias';
+import MenuLateral from '../All/Menu';
 
 const Layout = () => {
 
@@ -70,7 +71,7 @@ const Layout = () => {
                         className="w-full h-[8vh] gap-5 py-4 flex justify-center items-center px-[5%] mb-4 bg-[rgba(48,62,83,0.47)]
                         lg:px-[20%] xl:justify-between lg:h-[10vh] "
                     >
-                        <GiHamburgerMenu className="text-4xl! text-white" />
+                        <MenuLateral />
 
                         <ul className="flex items-center">
                             <li

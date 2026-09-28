@@ -1,8 +1,9 @@
 import { useState, createContext, useEffect, useRef } from 'react';
 import type { PropsWithChildren, RefObject, SetStateAction } from 'react'; //TIPAGEM PROP
-import type { User } from '../Types/Types';
+import type { Product, User } from '../Types/Types';
 import { HubConnectionBuilder, type HubConnection } from '@microsoft/signalr';
 import somPedido from '../assets/meme-fail-alert-locran-1-00-01.mp3';
+import { getToken } from '../Services/Storage';
 
 export type ContextType = {
     login: User | null;
@@ -24,6 +25,10 @@ export type ContextType = {
     setBackground: React.Dispatch<React.SetStateAction<string>>;
     backgroundSecond: string;
     setBackgroundSecond: React.Dispatch<React.SetStateAction<string>>;
+    produtosList: Array<Product> | null;
+    setProdutosList: React.Dispatch<React.SetStateAction<Array<Product> | null>>;
+    render: boolean;
+    setRender: React.Dispatch<React.SetStateAction<boolean>>;
 };
 
 
@@ -41,6 +46,8 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
     const loginRef = useRef<User | null>(null);
     const [background, setBackground] = useState<string>('#2a2342');
     const [backgroundSecond, setBackgroundSecond] = useState<string>('#422f80');
+    const [produtosList, setProdutosList] = useState<Array<Product> | null>(null);
+    const [render, setRender] = useState<boolean>(true);
     //#2a2342
     //#60a7a7
     //#422f80
@@ -181,13 +188,37 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
     }, []);
 
     useEffect(() => {
+
         loginRef.current = login;
+
     }, [login]);
 
+
+    //produtos
+    useEffect(() => {
+
+        const getProducts = async () => {
+            const token = await getToken();
+            const res = await fetch('https://dotnet-webapi-base-production.up.railway.app/api/Produtos', {
+                headers: {
+                    Authorization: `Bearer ${JSON.parse(token)}`,
+                },
+            });
+
+            const data = await res.json();
+            setProdutosList(data);
+        };
+
+        getProducts();
+
+    }, [render]);
+
+    
+    //background
     useEffect(() => {
         document.documentElement.style.setProperty('--cor-primaria', background);
         document.documentElement.style.setProperty('--cor-secundaria', backgroundSecond);
-    }, [background, backgroundSecond, login]);
+    }, [background, backgroundSecond]);
 
     return (
         <Context.Provider
@@ -211,6 +242,10 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
                 setBackground,
                 backgroundSecond,
                 setBackgroundSecond,
+                produtosList,
+                setProdutosList,
+                render,
+                setRender
             }}
         >
             {children}
