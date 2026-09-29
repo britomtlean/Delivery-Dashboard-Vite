@@ -211,9 +211,9 @@ export const ContextProvider = ({ children }: PropsWithChildren) => {
 
         getProducts();
 
-    }, [render]);
+    }, [render, login]);
 
-    
+
     //background
     useEffect(() => {
         document.documentElement.style.setProperty('--cor-primaria', background);

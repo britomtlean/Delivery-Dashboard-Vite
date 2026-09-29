@@ -69,7 +69,7 @@ const Layout = () => {
                 <>
                     <header
                         className="w-full h-[8vh] gap-5 py-4 flex justify-center items-center px-[5%] mb-4 bg-[rgba(48,62,83,0.47)]
-                        lg:px-[20%] xl:justify-between lg:h-[10vh] "
+                        lg:px-[15%] lg:justify-between lg:h-[8vh] "
                     >
                         <MenuLateral />
 
@@ -159,7 +159,7 @@ const Layout = () => {
                     <div
                         className="h-screen w-[95%] p-10 overflow-y-hidden border-2 border-slate-500 rounded-3xl
                         flex justify-center items-start
-                        lg:h-[90vh] lg:w-[90%] 2xl:w-[80%]"
+                        lg:h-[92vh] lg:w-[90%] 2xl:w-[80%]"
                     >
                         {renderComponente()}
                     </div>
