@@ -91,54 +91,57 @@ const Login = () => {
     if (loading == true) return <Loading />;
 
     return (
-        <div
-            className="w-full max-w-md p-8 rounded-2xl shadow-lg mt-50
+        <div className="w-full flex flex-col items-center justify-start gap-20">
+            <h1 className='text-center lg:text-3xl! mt-20 font-black'>Delivery System</h1>
+            <div
+                className="w-full max-w-md p-8 rounded-2xl shadow-lg
                  bg-white/10 backdrop-blur-md"
-        >
-            <h1 className="text-3xl! font-bold text-center text-gray-800 mb-8">Login</h1>
-
-            <form
-                onSubmit={(e) => {
-                    handleLogin(e);
-                }}
-                className="flex flex-col gap-5"
             >
-                <input
-                    type="text"
-                    placeholder="Insira o usuário"
-                    value={user}
-                    onChange={handleUserChange}
-                    className="p-3 rounded-lg border border-gray-300 bg-slate-200
+                <h1 className="text-3xl! font-bold text-center text-gray-800 mb-8">Login</h1>
+
+                <form
+                    onSubmit={(e) => {
+                        handleLogin(e);
+                    }}
+                    className="flex flex-col gap-5"
+                >
+                    <input
+                        type="text"
+                        placeholder="Insira o usuário"
+                        value={user}
+                        onChange={handleUserChange}
+                        className="p-3 rounded-lg border border-gray-300 bg-slate-200
                         focus:outline-none
                         focus:border-2 focus:border-cyan-300
                         transition
                         duration-200"
-                />
+                    />
 
-                <input
-                    type="password"
-                    placeholder="Insira a senha"
-                    value={password}
-                    onChange={handlePasswordChange}
-                    className="p-3 rounded-lg border border-gray-300 bg-slate-200
+                    <input
+                        type="password"
+                        placeholder="Insira a senha"
+                        value={password}
+                        onChange={handlePasswordChange}
+                        className="p-3 rounded-lg border border-gray-300 bg-slate-200
                         focus:outline-none
                         focus:border-2 focus:border-cyan-300
                         transition
                         duration-200"
-                />
+                    />
 
-                <button
-                    type="submit"
-                    className="mt-2 bg-blue-600 text-white font-semibold py-3 rounded-lg
+                    <button
+                        type="submit"
+                        className="mt-2 bg-blue-600 text-white font-semibold py-3 rounded-lg
                         hover:bg-blue-700
                         transition duration-200
                         focus:outline-none
                         focus:ring-2 focus:ring-cyan-500
                         focus:border-white"
-                >
-                    Entrar
-                </button>
-            </form>
+                    >
+                        Entrar
+                    </button>
+                </form>
+            </div>
         </div>
     );
 };

@@ -43,13 +43,14 @@ const Table = () => {
 
   return (
       <table
-          className="w-1/2 h-full max-h-[600px] p-5 lg:p-7
+          className="w-1/2 h-full p-5 lg:p-7
                 row-start-1 row-span-4 col-start-4 col-span-4
                 flex flex-col justify-start items-center
                 font-bold text-center
                 bg-radial from-blue-400/20 to-blue-500/20
                 shadow-xl/30 border border-white/0 rounded-3xl
-                hover:border-[3px] hover:border-[#64ffdd]"
+                hover:border-[3px] hover:border-[#64ffdd]
+                lg:h-[400px]"
       >
           <input
               type="text"
