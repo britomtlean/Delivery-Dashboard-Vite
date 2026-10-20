@@ -236,12 +236,12 @@ export default function Live() {
 
                     <div
                         id="mensagens"
-                        className="mt-6 mb-6 flex h-[48vh] w-full lg:w-[70%] flex-col gap-3 overflow-y-auto rounded-2xl border border-white/10 bg-slate-200/40 p-10 py-8 shadow-lg backdrop-blur-md"
+                        className="mt-6 mb-6 flex h-[48vh] max-h-[600px] w-full lg:w-[70%] flex-col items-center gap-3 overflow-y-auto rounded-2xl border border-white/10 bg-slate-200/40 p-10 py-8 shadow-lg backdrop-blur-md"
                     >
                         {(notify ?? []).map((pedido) => (
                             <div
                                 key={pedido.id}
-                                className="rounded-xl border border-white/10 bg-[rgb(48,83,83)]/30 p-4 transition-all duration-200 hover:bg-black/30"
+                                className="rounded-xl border border-white/10 bg-[rgb(48,83,83)]/30 p-4 transition-all duration-200 hover:bg-black/30 w-4/5 max-w-[500px]"
                             >
                                 {/* Header */}
                                 <div className="mb-3 flex items-center justify-between border-b border-white/10 pb-2">

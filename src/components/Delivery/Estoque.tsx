@@ -96,7 +96,7 @@ const Estoque = () => {
             </select>
 
             <div
-                className="w-full h-full flex flex-col justify-center items-center gap-4
+                className="w-full h-full flex flex-col justify-center items-center gap-4 lg:px-[5%]
                     lg:flex-row lg:items-start"
             >
                 <table
@@ -107,7 +107,7 @@ const Estoque = () => {
                         bg-radial from-blue-400/20 to-blue-500/20
                         shadow-xl/10 border border-white/0 rounded-3xl
                         hover:border-[3px] hover:border-[#64ffdd]
-                        lg:w-3/5 lg:max-h-[400px] lg:p-7"
+                        lg:w-3/5 lg:max-w-[700px] lg:min-h-[400px] lg:p-7"
                 >
                     <input
                         type="text"

@@ -66,10 +66,6 @@ const CriarProduto = ({render}: Prop) => {
           className="w-full h-full
             flex flex-col justify-start items-center gap-4 p-4"
       >
-          <div className="w-full text-center font-black">
-              <h1 className="text-white! text-3xl!">Criar Produto</h1>
-          </div>
-
           <div className="w-full h-full flex justify-center pt-4 px-4 gap-10">
               <div className="flex-1">
                   <FaBoxOpen className="w-full text-9xl! text-gray-200" />
@@ -82,6 +78,9 @@ const CriarProduto = ({render}: Prop) => {
                       createObject(e);
                   }}
               >
+                  <div className="w-full text-center font-black">
+                      <h1 className="text-white! text-3xl! py-5">Criar Produto</h1>
+                  </div>
                   <input
                       required
                       type="text"
@@ -104,7 +103,7 @@ const CriarProduto = ({render}: Prop) => {
                       className="bg-gray-200 p-4 w-full rounded-lg text-center"
                       onChange={(e) => {
                           const value = e.target.value.replace(/[^0-9,]/g, '');
-                          setValor(value)
+                          setValor(value);
                       }}
                   />
 
@@ -117,8 +116,8 @@ const CriarProduto = ({render}: Prop) => {
                       placeholder="Insira a quantidade de estoque..."
                       className="bg-gray-200 p-4 w-full rounded-lg text-center"
                       onChange={(e) => {
-                            const value = e.target.value.replace(/[^0-9]/g, '');
-                            setEstoque(value);
+                          const value = e.target.value.replace(/[^0-9]/g, '');
+                          setEstoque(value);
                       }}
                   />
 

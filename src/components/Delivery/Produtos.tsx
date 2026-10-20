@@ -135,9 +135,9 @@ const Produtos = ({ render }: Prop) => {
 
     return (
         <div
-            className="w-full h-full border-t-2 border-white pt-5 pb-60 border-b-2
+            className="w-full h-full border-t-2 border-white pt-[2%]! pb-[2%]! lg:px-[5%]! border-b-2
             flex flex-col justify-start items-center overflow-y-scroll gap-10
-            lg:overflow-hidden lg:p-5 lg:grid lg:grid-cols-7 lg:grid-rows-5 lg:gap-y-5 lg:gap-x-8 lg:overflow-y-hidden"
+            overflow-hidden! lg:p-5 lg:grid lg:grid-cols-7 lg:grid-rows-5 lg:gap-y-5 lg:gap-x-8"
         >
             <div className="w-full h-2/5 lg:h-3/4 lg:w-8/9 row-start-1 row-span-3 col-start-1 col-span-3 lg:relative -top-10">
                 <h1
@@ -160,12 +160,12 @@ const Produtos = ({ render }: Prop) => {
                     <button
                         onClick={returnProduct}
                         className="lg:absolute left-3 z-10
-                        size-10 rounded-full h-[60px] w-[60px] mr-4 bg-cyan-600!
+                        rounded-full h-[3vh] min-w-[2.5vw] mr-4 bg-cyan-600!
                         text-white backdrop-blur-sm
                         flex items-center justify-center
                         transition-all hover:scale-110"
                     >
-                        <FaAngleLeft className="size-5" />
+                        <FaAngleLeft className="size-[3.5vw] max-w-[10px]" />
                     </button>
 
                     <div
@@ -204,12 +204,12 @@ const Produtos = ({ render }: Prop) => {
                     <button
                         onClick={nextProduct}
                         className="lg:absolute right-3 z-10
-                        size-10 rounded-full h-[60px] w-[60px] ml-4 bg-cyan-600!
+                        rounded-full h-[3vh] min-w-[2.5vw] ml-4 bg-cyan-600!
                         text-white backdrop-blur-sm
                         flex items-center justify-center
                         transition-all hover:scale-110"
                     >
-                        <FaAngleRight className="size-5" />
+                        <FaAngleRight className="size-[3.5vw] max-w-[10px]" />
                     </button>
                 </div>
             </div>
@@ -234,13 +234,14 @@ const Produtos = ({ render }: Prop) => {
             </div>
 
             <table
-                className="w-full h-full max-h-[600px] p-5 lg:p-7
+                className="w-full h-full max-h-[400px] p-5 lg:p-7
                 row-start-1 row-span-4 col-start-4 col-span-4
                 flex flex-col justify-start items-center
                 font-bold text-center
                 bg-radial from-blue-400/20 to-blue-500/20
                 shadow-xl/30 border border-white/0 rounded-3xl
-                hover:border-[3px] hover:border-[#64ffdd]"
+                hover:border-[3px] hover:border-[#64ffdd]
+                lg:min-h-[400px]"
             >
                 <input
                     type="text"
@@ -283,8 +284,8 @@ const Produtos = ({ render }: Prop) => {
             </table>
 
             <button
-                className="h-3/5 w-full bg-blue-500! py-4! lg:relative lg:-top-4 hidden lg:block
-                col-start-4 col-span-4 row-start-5
+                className="h-3/5 max-h-[60px] w-full bg-blue-500! py-4! lg:relative lg:top-[95%] hidden lg:block
+                col-start-4 col-span-4 row-start-4
                 shadow-xl/30 rounded-3xl text-white"
                 onClick={() => render('new')}
             >

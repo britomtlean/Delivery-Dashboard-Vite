@@ -107,7 +107,7 @@ const Login = () => {
                 >
                     <input
                         type="text"
-                        placeholder="Insira o usuário"
+                        placeholder="Usuário padrão: teste"
                         value={user}
                         onChange={handleUserChange}
                         className="p-3 rounded-lg border border-gray-300 bg-slate-200
@@ -119,7 +119,7 @@ const Login = () => {
 
                     <input
                         type="password"
-                        placeholder="Insira a senha"
+                        placeholder="Senha padrão: 1234"
                         value={password}
                         onChange={handlePasswordChange}
                         className="p-3 rounded-lg border border-gray-300 bg-slate-200

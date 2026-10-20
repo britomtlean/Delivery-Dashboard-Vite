@@ -6,14 +6,12 @@ import Produtos from './Produtos';
 import Live from './Live';
 import CriarProduto from './CriarProduto';
 import Loading from '../All/Loading';
-import { GiHamburgerMenu } from 'react-icons/gi';
 
 import { Context } from '../../context/ContextProvider';
 import { useNavigate } from 'react-router-dom';
 import { deleteToken } from '../../Services/Storage';
 import Estoque from './Estoque';
 import Profile from './Profile';
-import Categorias from './Categorias';
 import MenuLateral from '../All/Menu';
 
 const Layout = () => {
@@ -52,8 +50,6 @@ const Layout = () => {
                 return <CriarProduto render={setSection} />;
             case 'estoque':
                 return <Estoque />;
-            case 'categorias':
-                return <Categorias />;
             case 'profile':
                 return <Profile />;
             default:
@@ -110,13 +106,6 @@ const Layout = () => {
                             </li>
 
                             <li
-                                onClick={() => setSection('categorias')}
-                                className="hidden md:block ml-[30px] text-lg! list-none cursor-pointer font-bold! text-[#ccc] transition-all hover:border-b-4  hover:border-red-500 hover:text-red-500"
-                            >
-                                Categorias
-                            </li>
-
-                            <li
                                 onClick={() => setSection('profile')}
                                 className="hidden md:block ml-[30px] list-none text-lg! cursor-pointer font-bold! text-[#ccc] transition-all hover:border-b-4  hover:border-red-500 hover:text-red-500"
                             >
@@ -157,7 +146,7 @@ const Layout = () => {
                     </header>
 
                     <div
-                        className="h-screen w-[95%] p-10 overflow-y-hidden border-2 border-slate-500 rounded-3xl
+                        className="h-screen w-[97%] p-[3%] lg:p-10 overflow-y-hidden border-2 border-slate-500 rounded-3xl
                         flex justify-center items-start
                         lg:h-[92vh] lg:w-[90%] 2xl:w-[80%]"
                     >

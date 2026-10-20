@@ -158,6 +158,7 @@ const Profile = () => {
                         type="text"
                         placeholder="Insira uma descrição"
                         defaultValue={login?.descricao}
+                        maxLength={30}
                         ref={descricaoRef}
                         onChange={(e) => {
                             descricaoRef.current!.value = e.target.value;
@@ -174,6 +175,7 @@ const Profile = () => {
                     type="text"
                     placeholder="Insira um horário"
                     defaultValue={login?.horario}
+                    maxLength={60}
                     ref={horarioRef}
                     disabled={true}
                     required
@@ -184,6 +186,7 @@ const Profile = () => {
                     type="text"
                     placeholder="Insira um endereço"
                     defaultValue={login?.endereco}
+                    maxLength={60}
                     ref={enderecoRef}
                     disabled={true}
                     required
@@ -194,6 +197,7 @@ const Profile = () => {
                     type="text"
                     placeholder="Insira o WhatsApp"
                     defaultValue={login?.whatsApp}
+                    maxLength={16}
                     ref={whatsappRef}
                     onChange={(e) => {
                         whatsappRef.current!.value = e.target.value;
@@ -208,6 +212,7 @@ const Profile = () => {
                     type="text"
                     placeholder="Insira o Instagram"
                     defaultValue={login?.instagram}
+                    maxLength={20}
                     ref={instagramRef}
                     onChange={(e) => {
                         instagramRef.current!.value = e.target.value;
