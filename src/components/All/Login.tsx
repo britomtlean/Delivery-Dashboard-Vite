@@ -92,7 +92,7 @@ const Login = () => {
 
     return (
         <div className="w-full flex flex-col items-center justify-start gap-20">
-            <h1 className='text-center lg:text-3xl! mt-20 font-black'>Delivery System</h1>
+            <h1 className='text-center lg:text-4xl! mt-20 font-black'>Delivery System</h1>
             <div
                 className="w-full max-w-md p-8 rounded-2xl shadow-lg
                  bg-white/10 backdrop-blur-md"
