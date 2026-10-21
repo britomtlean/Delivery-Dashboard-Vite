@@ -136,40 +136,42 @@ const Produtos = ({ render }: Prop) => {
     return (
         <div
             className="w-full h-full border-t-2 border-white pt-[2%]! pb-[2%]! lg:px-[5%]! border-b-2
-            flex flex-col justify-start items-center overflow-y-scroll gap-10
+            flex flex-col justify-start items-center
             overflow-hidden! lg:p-5 lg:grid lg:grid-cols-7 lg:grid-rows-5 lg:gap-y-5 lg:gap-x-8"
         >
-            <div className="w-full h-2/5 lg:h-3/4 lg:w-8/9 row-start-1 row-span-3 col-start-1 col-span-3 lg:relative -top-10">
+            <div className="w-full h-2/5 lg:h-4/5 lg:w-8/9 row-start-1 row-span-3 col-start-1 col-span-3 lg:relative -top-10">
                 <h1
                     className="
-                    text-4xl!
+                    text-3xl! mb-2!
+                    flex justify-center
+                    items-center
                     text-white!
                     font-black font-sans!
-                    mb-4 text-center
-                    [transform:perspective(200px)_rotateX(10deg)]
+                    text-center
                 "
                 >
                     Mais vendidos
                 </h1>
 
                 <div
-                    className="relative w-full h-3/4
+                    className="relative w-full h-4/5
                     flex items-center justify-center
-                    lg:h-full"
+                    "
                 >
                     <button
                         onClick={returnProduct}
-                        className="lg:absolute left-3 z-10
-                        rounded-full h-[3vh] min-w-[2.5vw] mr-4 bg-cyan-600!
+                        className="lg:absolute left-8 z-10
+                        rounded-full h-[3vh] mr-4 bg-cyan-600!
                         text-white backdrop-blur-sm
                         flex items-center justify-center
-                        transition-all hover:scale-110"
+                        transition-all hover:scale-110
+                        lg:min-h-[1.8vw] lg:min-w-[2.5vw]"
                     >
-                        <FaAngleLeft className="size-[3.5vw] max-w-[10px]" />
+                        <FaAngleLeft className="lg:size-[0.8vw] lg:min-w-[10px] size-6" />
                     </button>
 
                     <div
-                        className="w-full h-full
+                        className="w-4/5 h-full
                         flex flex-col justify-center items-center
                         rounded-3xl
                         bg-white/20 backdrop-blur-md
@@ -203,29 +205,30 @@ const Produtos = ({ render }: Prop) => {
 
                     <button
                         onClick={nextProduct}
-                        className="lg:absolute right-3 z-10
-                        rounded-full h-[3vh] min-w-[2.5vw] ml-4 bg-cyan-600!
+                        className="lg:absolute right-8 z-10
+                        rounded-full h-[3vh] ml-4 bg-cyan-600!
                         text-white backdrop-blur-sm
                         flex items-center justify-center
-                        transition-all hover:scale-110"
+                        transition-all hover:scale-110
+                        lg:min-h-[1.8vw] lg:min-w-[2.5vw]"
                     >
-                        <FaAngleRight className="size-[3.5vw] max-w-[10px]" />
+                        <FaAngleRight className="lg:size-[0.8vw] lg:min-w-[10px] size-6" />
                     </button>
                 </div>
             </div>
 
             <div
-                className="p-5 h-full w-8/9 lg:h-4/5 lg:relative -top-10
-                flex flex-col justify-center items-center gap-2
+                className="p-4 lg:py-4! py-6 w-8/9 lg:min-h-4/5 lg:relative -top-10 mb-20! lg:mb-0!
+                flex flex-col justify-start items-center gap-2
                 col-start-1 col-span-3 row-start-4 row-span-2
                 bg-radial from-blue-400/20 to-blue-500/20 shadow-xl/30 border border-white rounded-3xl
                 hover:border-[3px] hover:border-[#64ffdd]"
             >
-                <h1 className="text-3xl! text-white! font-sans font-bold">Total de vendas:</h1>
+                <h1 className="text-2xl! text-white! font-sans font-bold">Total de vendas:</h1>
 
                 <div
-                    className="bg-white/30 w-full h-full py-15 text-center rounded-3xl flex justify-center items-center
-                lg:py-8"
+                    className="bg-white/30 w-full text-center rounded-3xl flex justify-center items-center overflow-hidden!
+                py-[3.5vh] lg:py-[3.5vw]"
                 >
                     <h2 className="text-yellow-400 font-extrabold font-sans text-2xl!">
                         {firstProduct?.quantidadeVendida || 0} Produtos vendidos

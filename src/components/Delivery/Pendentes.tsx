@@ -161,10 +161,10 @@ async function carregarPedidos(): Promise<void> {
     }
 
     return (
-        <div className="flex w-full h-full flex-col items-center gap-5 p-10 text-white">
-            <h1 className="text-4xl font-bold">Gerenciamento de Vendas</h1>
+        <div className="flex w-full h-full flex-col justify-start items-center gap-5 lg:p-[1vw] text-white overflow-hidden">
+            <h1 className="text-2xl! font-bold py-2">Gerenciamento de Vendas</h1>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 p-5 overflow-hidden">
                 <input
                     type="date"
                     value={dataSelecionada}
@@ -245,7 +245,7 @@ async function carregarPedidos(): Promise<void> {
                         </table>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 p-5 overflow-hidden">
                         <button
                             disabled={paginaAtual === 1}
                             onClick={() => setPaginaAtual((prev) => prev - 1)}

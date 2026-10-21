@@ -125,10 +125,10 @@ export default function Confirmados() {
     }
 
     return (
-        <div className="flex w-full h-full flex-col items-center gap-5 p-10 text-white overflow-hidden">
-            <h1 className="text-4xl font-bold">Gerenciamento de Vendas</h1>
+        <div className="flex w-full h-full flex-col justify-start items-center gap-5 lg:p-[1vw] text-white overflow-hidden">
+            <h1 className="text-2xl! font-bold py-2">Gerenciamento de Vendas</h1>
 
-            <div className="flex items-center gap-3">
+            <div className="flex items-center gap-3 p-5 overflow-hidden">
                 <input
                     type="date"
                     value={dataSelecionada}
@@ -154,8 +154,8 @@ export default function Confirmados() {
                 <div className="mt-10 text-2xl font-bold">Nenhuma venda encontrada</div>
             ) : (
                 <>
-                    <div className="overflow-auto w-full rounded-xl border border-gray-600 bg-gray-900 shadow-2xl h-[800px] lg:h-[500px] lg:overflow-x-hidden">
-                        <table className="w-full">
+                    <div className="overflow-auto rounded-xl border border-gray-600 bg-gray-900 shadow-2xl lg:h-[500px]">
+                        <table className="min-w-[900px]">
                             <thead className="bg-gray-700">
                                 <tr className="w-full">
                                     <th className="px-6 py-4 text-center">ID</th>
@@ -209,7 +209,7 @@ export default function Confirmados() {
                         </table>
                     </div>
 
-                    <div className="flex items-center gap-3">
+                    <div className="flex items-center gap-3 p-5 overflow-hidden">
                         <button
                             disabled={paginaAtual === 1}
                             onClick={() => setPaginaAtual((prev) => prev - 1)}

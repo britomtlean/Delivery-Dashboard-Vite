@@ -114,7 +114,7 @@ const Estoque = () => {
                         placeholder="Buscar..."
                         value={busca}
                         onChange={(e) => setBusca(e.target.value)}
-                        className="my-4 px-4 py-2 rounded w-full text-[16px] font-normal shadow bg-sky-200"
+                        className="h-[2vh] lg:h-[2vw] my-4 px-4 py-2 rounded w-full text-[16px] font-normal shadow bg-sky-200"
                     />
 
                     <thead className="w-full">
@@ -151,9 +151,9 @@ const Estoque = () => {
                 lg:w-[500px]"
                 >
                     {estoque == 'entrada' ? (
-                        <h1 className="text-4xl! text-white! font-bold!">Entrada</h1>
+                        <h1 className="text-2xl! text-white! font-bold!">Entrada</h1>
                     ) : (
-                        <h1 className="text-4xl! text-white! font-bold!">Saída</h1>
+                        <h1 className="text-2xl! text-white! font-bold!">Saída</h1>
                     )}
                     <form
                         onSubmit={(e) => {
@@ -167,7 +167,7 @@ const Estoque = () => {
                             onChange={(e) => {
                                 setProdutoSelecionado(e.target.value);
                             }}
-                            className="w-full p-5 lg:p-2 bg-gray-200 rounded-lg outline-none! text-xl! text-center"
+                            className="w-full h-[2vh] lg:h-[2vw] p-5 lg:p-2 bg-gray-200 rounded-lg outline-none! text-xl! text-center"
                             type="search"
                             placeholder="Insira o ID do produto"
                             value={produtoSelecionado}
@@ -179,7 +179,7 @@ const Estoque = () => {
                                     return value;
                                 });
                             }}
-                            className="w-full p-5 lg:p-2 bg-gray-200 rounded-lg outline-none! text-xl! text-center"
+                            className="w-full h-[2vh] lg:h-[2vw] p-5 lg:p-2 bg-gray-200 rounded-lg outline-none! text-xl! text-center"
                             type="search"
                             placeholder="Insira a quantidade"
                             value={quantidadeSelecionada}

@@ -136,7 +136,7 @@ const Profile = () => {
             </div>
 
             <form
-                className="w-full p-8 text-center border border-slate-300 rounded-lg
+                className="w-full p-[2vw] text-center border border-slate-300 rounded-lg overflow-hidden!
                 flex flex-col justify-center items-center gap-4
                 lg:w-3/8 md:text-2xl text-slate-800"
                 onSubmit={(e) => {
@@ -145,7 +145,7 @@ const Profile = () => {
             >
                 <div className="w-full flex justify-between gap-4">
                     <input
-                        className="border w-full border-white bg-gray-100 text-center rounded-[10px] p-2 py-4! focus:outline-blue-500 focus:outline-1
+                        className="border w-full h-[2vw] border-white bg-gray-100 text-center rounded-lg p-2 py-2! focus:outline-blue-500 focus:outline-1
                     md:w-full"
                         type="text"
                         defaultValue={login?.nome}
@@ -153,7 +153,7 @@ const Profile = () => {
                         disabled={true}
                     />
                     <input
-                        className="border w-full border-white bg-gray-100 text-center rounded-[10px] p-2 py-4! focus:outline-blue-500 focus:outline-1
+                        className="border w-full h-[2vw] border-white bg-gray-100 text-center rounded-lg p-2 py-2! focus:outline-blue-500 focus:outline-1
                     md:w-full"
                         type="text"
                         placeholder="Insira uma descrição"
@@ -170,7 +170,7 @@ const Profile = () => {
                 </div>
 
                 <input
-                    className="border w-full border-white bg-gray-100 text-center rounded-[10px] p-2 py-4! focus:outline-blue-500 focus:outline-1
+                    className="border w-full h-[2vw] border-white bg-gray-100 text-center rounded-lg p-2 py-2! focus:outline-blue-500 focus:outline-1
                     md:w-full"
                     type="text"
                     placeholder="Insira um horário"
@@ -181,7 +181,7 @@ const Profile = () => {
                     required
                 />
                 <input
-                    className="border w-full border-white bg-gray-100 text-center rounded-[10px] p-2 py-4! focus:outline-blue-500 focus:outline-1
+                    className="border w-full h-[2vw] border-white bg-gray-100 text-center rounded-lg p-2 py-2! focus:outline-blue-500 focus:outline-1
                     md:w-full"
                     type="text"
                     placeholder="Insira um endereço"
@@ -192,7 +192,7 @@ const Profile = () => {
                     required
                 />
                 <input
-                    className="border w-full border-white bg-gray-100 text-center rounded-[10px] p-2 py-4! focus:outline-blue-500 focus:outline-1
+                    className="border w-full h-[2vw] border-white bg-gray-100 text-center rounded-lg p-2 py-2! focus:outline-blue-500 focus:outline-1
                     md:w-full"
                     type="text"
                     placeholder="Insira o WhatsApp"
@@ -207,7 +207,7 @@ const Profile = () => {
                     required
                 />
                 <input
-                    className="border w-full border-white bg-gray-100 text-center rounded-[10px] p-2 py-4! focus:outline-blue-500 focus:outline-1
+                    className="border w-full h-[2vw] border-white bg-gray-100 text-center rounded-lg p-2 py-2! focus:outline-blue-500 focus:outline-1
                     md:w-full"
                     type="text"
                     placeholder="Insira o Instagram"
@@ -223,13 +223,13 @@ const Profile = () => {
                 />
 
                 <div
-                    className="w-full h-full
+                    className="w-full
                     flex flex-col items-center justify-start gap-1"
                 >
                     <h1 className="text-xl! text-black! font-medium!">Defina a cor de loyout:</h1>
                     <div className="w-full flex gap-4 justify-between">
                         <input
-                            className="w-full h-[80px] border border-slate-600 rounded-lg m-2"
+                            className="w-full h-[5vw] border border-slate-600 rounded-lg m-2"
                             type="color"
                             defaultValue={login?.background || '#60a7a7'}
                             ref={backgroundRef}
@@ -240,7 +240,7 @@ const Profile = () => {
                             disabled={true}
                         />
                         <input
-                            className="w-full h-[80px] border border-slate-600 rounded-lg m-2"
+                            className="w-full h-[5vw] border border-slate-600 rounded-lg m-2"
                             type="color"
                             defaultValue={login?.backgroundSecond || '#69a87e'}
                             ref={backgroundSecondRef}

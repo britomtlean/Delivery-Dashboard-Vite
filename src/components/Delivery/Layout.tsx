@@ -64,8 +64,8 @@ const Layout = () => {
             {login ? (
                 <>
                     <header
-                        className="w-full h-[8vh] gap-5 py-4 flex justify-center items-center px-[5%] mb-4 bg-[rgba(48,62,83,0.47)]
-                        lg:px-[15%] lg:justify-between lg:h-[8vh] "
+                        className="w-full h-[8vh] gap-5 py-4 flex justify-center items-center px-[5%] mb-4 bg-[rgba(48,62,83,0.47)] overflow-y-hidden
+                        lg:px-[10%] 2xl:px-[15%] lg:justify-between lg:h-[10vh] "
                     >
                         <MenuLateral />
 
@@ -113,7 +113,7 @@ const Layout = () => {
                             </li>
                         </ul>
 
-                        <div className="flex h-full gap-4 rounded-2xl justify-center items-center text-[1rem]">
+                        <div className="flex gap-4 rounded-2xl justify-center items-center p-4">
                             <h3 className="text-white font-bold hidden">{login?.nome}</h3>
 
                             <div className="flex gap-2">
